@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% load bootstrap_tags %} {% block content %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+            <form method="POST" action="{% url 'login' %}?next={{ next }}" class="accountform">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="login100-form-title p-b-32">Login</legend>
+                    {{ user_form | as_bootstrap }}
+                    <div class="flex-sb-m w-full p-b-48">
+                        <a class="txt3" href="{% url 'password_reset' %}">Forgot password ?</a>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">Login</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
