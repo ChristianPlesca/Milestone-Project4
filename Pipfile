@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 django = "==1.11.24"
 django-forms-bootstrap = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"
