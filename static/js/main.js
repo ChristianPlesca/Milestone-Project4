@@ -21,3 +21,10 @@ $(document).ready(function() {
         $(".file-upload").click();
     });
 });
+
+/*==================Products Headder=========*/
+$(function() {
+    setTimeout(function() {
+        $("#alert").hide('blind', {}, 500)
+    }, 2000);
+});

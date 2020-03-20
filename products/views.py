@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import Product
 
 def home_page(request):
     """Display index page"""
-    return render(request,'index.html')
+    products = Product.objects.all()
+    return render(request, 'index.html', {'products': products})
