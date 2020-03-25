@@ -1,14 +1,11 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load humanize %}
 
 <!-- Header -->
 <div class="masthead">
     <div class="container">
-        <div class="intro-text">
-            <div class="intro-lead-in">Website Logo</div>
-        </div>
     </div>
 </div>
-<div class="container ">
+<div class="container " id="product-cards">
     {% for product in products %}
     <div class="card bg-white shadow-1 blue-hover ">
         <img src="{{ MEDIA_URL }}{{ product.image }}" alt="Product Image" class="d-block w-full product-image">
@@ -26,9 +23,34 @@
         </div>
         <div class="product-links">
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">See Product Details</a>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">Buy for {{product.initial_price}} £</a>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">Buy for {{product.initial_price|intcomma }} £</a>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }} £</a>
         </div>
     </div>
     {% endfor %}
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                {% for product in products %}
+                <h5 class="modal-title" id="exampleModalCenterTitle">{{product.name}}</h5>
+                {%endfor%}
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST">
+                    <input required class="form-control" placeholder="Enter you max bid" type="number" step="any" min="0" max="223.9">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Submit Bid</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

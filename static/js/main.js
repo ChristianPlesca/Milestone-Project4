@@ -25,6 +25,6 @@ $(document).ready(function() {
 /*==================Products Headder=========*/
 $(function() {
     setTimeout(function() {
-        $("#alert").hide('blind', {}, 500)
+        $("#alert").hide('blind', {}, 500);
     }, 2000);
 });
