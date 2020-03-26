@@ -19,6 +19,14 @@ nav a {
     height: 2.5rem;
 }
 
+nav li a i {
+    margin-right: 5px;
+}
+
+.sort-by {
+    margin-right: 10px;
+}
+
 
 /*==================Login Form=========*/
 
