@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'products',
     'accounts',
-    "search",
-    'multiupload',
+    'search',
 ]
 
 MIDDLEWARE = [

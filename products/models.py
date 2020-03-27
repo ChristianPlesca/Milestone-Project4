@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import datetime    
+
 
 class Product(models.Model):
     name = models.CharField(max_length=254, default="")
@@ -11,8 +13,19 @@ class Product(models.Model):
     height = models.DecimalField(max_digits=5, decimal_places=1)
     width = models.DecimalField(max_digits=5, decimal_places=1)
     past_owners = models.TextField()
-    date_created = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='images/%Y/%m/%d')
+    date_created = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
         return self.name
+
+class ProductsPictures(models.Model):
+    image = models.ImageField(upload_to='images/%Y/%m/%d')
+    postid = models.ForeignKey('Product')
+
+    def __str__(self):
+        return self.postid.name
+
+
+
+
+

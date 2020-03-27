@@ -23,8 +23,6 @@ $(document).ready(function() {
 });
 
 /*==================Products Headder=========*/
-$(function() {
-    setTimeout(function() {
-        $("#alert").hide('blind', {}, 500);
-    }, 2000);
-});
+setTimeout(function() {
+    $('#alert').fadeOut('slow');
+}, 3000);
