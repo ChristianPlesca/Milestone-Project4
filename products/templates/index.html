@@ -19,40 +19,33 @@
                 <p class="mb-1">
                     {{product.description}} &hellip;
                 </p>
-
-                <script>
-                    var countDownDate = new Date('{{product.date_created|truncatechars:20}}').getTime();
-
-                    var x = setInterval(function() {
-                        var now = new Date().getTime();
-                        var distance = countDownDate - now;
-                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                        document.querySelectorAll(".expiry-date").forEach(function(element) {
-                            element.innerHTML = "Expires in:" + days + "d " + hours + "h " +
-                                minutes + "m " + seconds + "s ";
-                            if (distance < 0) {
-                                clearInterval(x);
-                                element.innerHTML = "EXPIRED";
-                                document.querySelectorAll(".bid-button").forEach(function(element) {
-                                    element.disabled = true;
-                                })
-                            }
-                        })
-
-                    }, 1000);
-                </script>
         </div>
         <div class="product-links">
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">See Product Details</a>
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">Buy for {{product.price|intcomma }} £</a>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }}£ <span class = "expiry-date"></span></a>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }}£ <span id = "expiry-date{{product.id}}"></span></a>
             <p id="date-created">{{product.date_created}}</p>
         </div>
     </div>
+    <script>
+        var countDownDate = new Date('{{product.date_created|truncatechars:20}}').getTime();
 
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("expiry-date{{product.id}}").innerHTML = "Expires in:" + days + "d " + hours + "h " +
+                minutes + "m " + seconds + "s ";
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("expiry-date{{product.id}}").innerHTML = "EXPIRED";
+                document.getElementById("bid-button").disabled = true;
+            }
+        }, 1000);
+    </script>
     {% endfor %}
 </div>
 
