@@ -6,7 +6,7 @@ class PostPictureInline(admin.TabularInline):
     fields = ['image']
 
 class PostAdmin(admin.ModelAdmin):
-    inlines = [PostPictureInline,]
+    inlines = [PostPictureInline]
 
 admin.site.register(Product, PostAdmin)
 

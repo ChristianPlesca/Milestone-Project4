@@ -13,17 +13,18 @@ class Product(models.Model):
     height = models.DecimalField(max_digits=5, decimal_places=1)
     width = models.DecimalField(max_digits=5, decimal_places=1)
     past_owners = models.TextField()
-    date_created = models.DateTimeField(default=datetime.now, blank=True)
+    date_created = models.DateTimeField()
+    main_image = models.ImageField(upload_to='images/%Y/%m/%d')
 
     def __str__(self):
         return self.name
 
 class ProductsPictures(models.Model):
     image = models.ImageField(upload_to='images/%Y/%m/%d')
-    postid = models.ForeignKey('Product')
+    product_id = models.ForeignKey('Product')
 
     def __str__(self):
-        return self.postid.name
+        return self.product_id.name
 
 
 

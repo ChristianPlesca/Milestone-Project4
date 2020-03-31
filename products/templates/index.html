@@ -5,11 +5,11 @@
     <div class="container">
     </div>
 </div>
+
 <div class="container " id="product-cards">
     {% for product in products %}
     <div class="card bg-white shadow-1 blue-hover ">
-        <img src="{{ MEDIA_URL }}{{ product.image }}" alt="Product Image" class="d-block w-full product-image">
-
+        <img src="{{ MEDIA_URL }}{{ product.main_image }}" alt="Product Image" class="d-block w-full product-image">
         <div class="px-2 py-2">
 
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
@@ -20,23 +20,48 @@
                     {{product.description}} &hellip;
                 </p>
 
+                <script>
+                    var countDownDate = new Date('{{product.date_created|truncatechars:20}}').getTime();
+
+                    var x = setInterval(function() {
+                        var now = new Date().getTime();
+                        var distance = countDownDate - now;
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        document.querySelectorAll(".expiry-date").forEach(function(element) {
+                            element.innerHTML = "Expires in:" + days + "d " + hours + "h " +
+                                minutes + "m " + seconds + "s ";
+                            if (distance < 0) {
+                                clearInterval(x);
+                                element.innerHTML = "EXPIRED";
+                                document.querySelectorAll(".bid-button").forEach(function(element) {
+                                    element.disabled = true;
+                                })
+                            }
+                        })
+
+                    }, 1000);
+                </script>
         </div>
         <div class="product-links">
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">See Product Details</a>
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">Buy for {{product.price|intcomma }} £</a>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }} £</a>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }}£ <span class = "expiry-date"></span></a>
+            <p id="date-created">{{product.date_created}}</p>
         </div>
     </div>
+
     {% endfor %}
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                {% for product in products %}
-                <h5 class="modal-title" id="exampleModalCenterTitle">{{product.name}}</h5>
-                {%endfor%}
+                <h5 class="modal-title" id="exampleModalCenterTitle">Bid</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
