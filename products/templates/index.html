@@ -1,21 +1,17 @@
 {% extends 'base.html' %} {% load humanize %} {% block content %}
-
 <!-- Header -->
 <div class="masthead">
     <div class="container">
     </div>
 </div>
-
 <div class="container " id="product-cards">
     {% for product in products %}
     <div class="card bg-white shadow-1 blue-hover ">
         <img src="{{ MEDIA_URL }}{{ product.main_image }}" alt="Product Image" class="d-block w-full product-image">
         <div class="px-2 py-2">
-
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
                 {{product.name}}
                 </h1>
-
                 <p class="mb-1">
                     {{product.description}} &hellip;
                 </p>
@@ -23,16 +19,15 @@
         <div class="product-links">
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">See Product Details</a>
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">Buy for {{product.price|intcomma }} £</a>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }}£ <span id = "expiry-date{{product.id}}"></span></a>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }}£ <span id="expiry-date{{product.id}}"></span></a>
             <p id="date-created">{{product.date_created}}</p>
         </div>
     </div>
     <script>
-        var countDownDate = new Date('{{product.date_created|truncatechars:20}}').getTime();
-
+        var 'countDownDate{{product.id}}' = new Date('{{product.date_created|truncatechars:20}}').getTime();
         var x = setInterval(function() {
             var now = new Date().getTime();
-            var distance = countDownDate - now;
+            var distance = 'countDownDate{{product.id}}' - now;
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -46,9 +41,9 @@
             }
         }, 1000);
     </script>
+
     {% endfor %}
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -71,5 +66,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
