@@ -6,7 +6,7 @@
 </div>
 <div class="container " id="product-cards">
     {% for product in products %}
-    <div class="card bg-white shadow-1 blue-hover ">
+    <div class="card bg-white shadow-1 green-hover ">
         <img src="{{ MEDIA_URL }}{{ product.main_image }}" alt="Product Image" class="d-block w-full product-image">
         <div class="px-2 py-2">
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
@@ -17,31 +17,32 @@
                 </p>
         </div>
         <div class="product-links">
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">See Product Details</a>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">Buy for {{product.price|intcomma }} £</a>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" data-toggle="modal" data-target="#exampleModalCenter">Bid {{product.bid_price|intcomma }}£ <span id="expiry-date{{product.id}}"></span></a>
-            <p id="date-created">{{product.date_created}}</p>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-info-circle" aria-hidden="true"></i>See Product Details</a>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</a>
+            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark" data-toggle="modal" data-target="#exampleModalCenter" id = "bid-button{{product.id}}"><i class="fa fa-handshake-o" aria-hidden="true"></i>Bid {{product.bid_price|intcomma }}£ </a>
+            <div class="expiry-date " id="expiry-date{{product.id}}"></div>
         </div>
+        <script>
+            $(document).ready(function() {
+            var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:20}}').getTime();
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate{{product.id}} - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("expiry-date{{product.id}}").innerHTML = "Bid Expires In: " + days + "d " + hours + "h " +
+                    minutes + "m " + seconds + "s ";
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("expiry-date{{product.id}}").innerHTML = "BID EXPIRED !!!";
+                    document.getElementById("bid-button{{product.id}}").disabled = true;
+                }
+            }, 1000);
+        });
+        </script>
     </div>
-    <script>
-        var countDownDate {{product.id}} = new Date('{{product.date_created|truncatechars:20}}').getTime();
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = countDownDate {{product.id}} - now;
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("expiry-date{{product.id}}").innerHTML = "Expires in:" + days + "d " + hours + "h " +
-                minutes + "m " + seconds + "s ";
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("expiry-date{{product.id}}").innerHTML = "EXPIRED";
-                document.getElementById("bid-button").disabled = true;
-            }
-        }, 1000);
-    </script>
-
     {% endfor %}
 </div>
 <!-- Modal -->

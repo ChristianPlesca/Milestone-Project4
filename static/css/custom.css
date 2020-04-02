@@ -182,32 +182,19 @@ body,
     font-size: 2rem;
 }
 
-.styled-link {
-    text-decoration: none;
-    outline: none;
-    color: #2196fe;
-    transition: all 0.25s ease-in;
-}
-
-.styled-link:hover,
-.styled-link:focus,
-.styled-link:active {
-    color: #536dfe;
-}
-
 .shadow-1 {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
-.blue-hover {
+.green-hover {
     transition: all 0.25s ease-in;
     border-bottom: 5px solid transparent;
 }
 
-.blue-hover:hover {
+.green-hover:hover {
     transform: translateY(-5px);
     border: none;
-    border-bottom: 5px solid #2196fe;
+    border-bottom: 5px solid #28a745;
 }
 
 .container {
@@ -228,7 +215,7 @@ body,
 }
 
 .mb-1 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem !important;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -253,10 +240,6 @@ body,
     margin-top: 1rem;
 }
 
-.ml-2 {
-    margin-left: 2rem;
-}
-
 .mb-2 {
     margin-bottom: 2rem;
 }
@@ -269,7 +252,7 @@ body,
     text-align: center;
     padding: 15px;
     margin: 10px;
-    height: 40rem;
+    height: 45rem;
     overflow: hidden;
     border-radius: 7px !important;
     display: inline-block !important;
@@ -279,7 +262,67 @@ body,
     display: inline-grid;
 }
 
+a.bttn-dark {
+    color: #212529;
+    text-decoration: none;
+    -webkit-transition: 0.3s all ease;
+    transition: 0.3s ease all;
+}
+a.bttn-dark:hover {
+    color: #fff;
+}
+a.bttn-dark:focus {
+    color: #fff;
+}
 
+.bttn-dark {
+    margin: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    width: 19rem;
+    font-weight: bold;
+    padding: 10px 0px;
+    border-radius: 5px;
+    border: 1px solid #212529;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+.bttn-dark:before {
+    -webkit-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: #212529;
+    z-index: -1;
+}
+.bttn-dark:hover:before {
+    -webkit-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+.bttn-dark:focus:before {
+    -webkit-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+.fa-info-circle, .fa-credit-card-alt, .fa-handshake-o {
+    font-size: 15px !important;
+    margin: 5px;
+}
 /*==================Products View Headder=========*/
 
 .masthead {
@@ -309,6 +352,17 @@ body,
     line-height: 22px;
     margin-bottom: 25px;
     font-family: 'Droid Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
+}
+
+.expiry-date{
+    background-color: crimson;
+    color: honeydew;
+    padding: 6px;
+    letter-spacing: 2px;
+    border-radius: 20px;
+    opacity: 0.9;
+    font-weight: 600;
+    margin-top: 10px;
 }
 
 
