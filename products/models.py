@@ -15,6 +15,7 @@ class Product(models.Model):
     past_owners = models.TextField()
     date_created = models.DateTimeField(default=None)
     main_image = models.ImageField(upload_to='images/%Y/%m/%d')
+    
 
     def __str__(self):
         return self.name

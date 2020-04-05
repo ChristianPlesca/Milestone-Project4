@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% load humanize %}
+
+{% block content %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55 product-details-wrap">
+            <h1 class="text-center login100-form-title product-title">
+                {{product.name}}
+            </h1>
+            <hr>
+            <!-- Page Content -->
+            <div class="container page-top">
+                <div class="row">
+                    {% for item in product_pictures %}
+                    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                        <a href="{{ MEDIA_URL }}{{product.image }}" class="fancybox" rel="ligthbox">
+                            <img  src="{{ MEDIA_URL }}{{product.image }}" class="zoom img-fluid "  alt="Product Images">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+            <div class="product-details-description">
+                <div>
+                    {{product.description}}
+                </div>
+                <hr>
+                <p>Author: {{product.author}}</p>
+                <p>Date: {{product.date_made}}</p>
+                <p>Made in: {{product.country_made_in}}</p>
+                <p>Height: {{product.height}} cm</p>
+                <p>Width: {{product.width}} cm</p>
+                <p>Previosly owned by: {{product.past_owners}}</p>
+            </div>
+            <hr>
+            <div class="product-links product-details-links">
+                <a href="{% url 'index' %}#product-cards" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i>Products</a>
+                <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

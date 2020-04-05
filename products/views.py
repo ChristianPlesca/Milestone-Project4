@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import Product,ProductsPictures
-from django.core import serializers
 
 def home_page(request):
     """Display index page"""
     products = Product.objects.all()
-    product_images = ProductsPictures.objects.all()
-    json_serializer = serializers.get_serializer("json")()
-    query_results = json_serializer.serialize( Product.objects.all(), ensure_ascii=False )
-    return render(request, 'index.html', {'products': products, 'product_images':product_images,'query_results':query_results})
+    product_pictures = ProductsPictures.objects.all()
+    return render(request, 'index.html', {'products': products,'product_pictures':product_pictures})
+
+def product_details(request,pk):
+    """Display product details page"""
+    product = get_object_or_404(Product, pk=pk)
+    return render(request,'product_details.html', {'product':product})

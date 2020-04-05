@@ -319,7 +319,7 @@ a.bttn-dark:focus {
     right: 0;
     opacity: 1;
 }
-.fa-info-circle, .fa-credit-card-alt, .fa-handshake-o {
+.fa-info-circle, .fa-credit-card-alt, .fa-handshake-o,.fa-arrow-circle-left {
     font-size: 15px !important;
     margin: 5px;
 }
@@ -367,4 +367,46 @@ a.bttn-dark:focus {
 
 .bid-alert {
     margin-top: 5px;
+}
+
+/*==================Product Details=========*/
+@media(min-width:1400px){
+.product-details-wrap{
+    width: 1600px !important;
+}  
+}
+
+img.zoom {
+    width: 100%;
+    height: 200px;
+    border-radius:2px;
+    object-fit:cover;
+    background: center;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+.transition {
+    -webkit-transform: scale(1.2); 
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+.modal-header {
+    border-bottom: none;
+}
+.product-details-description{
+    padding: 15px;
+}
+
+.product-details-links{
+    display: flex;
+}
+
+.product-title{
+    margin:20px
 }

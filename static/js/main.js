@@ -26,4 +26,19 @@ $(document).ready(function() {
 setTimeout(function() {
     $('#alert').fadeOut('slow');
 }, 3000);
+/*==================Product Details Slider=========*/
 
+$(document).ready(function(){
+    $(".fancybox").fancybox({
+          openEffect: "none",
+          closeEffect: "none"
+      });
+      
+      $(".zoom").hover(function(){
+          
+          $(this).addClass('transition');
+      }, function(){
+          
+          $(this).removeClass('transition');
+      });
+  });
