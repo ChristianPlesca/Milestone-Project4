@@ -1,37 +1,45 @@
 {% extends 'base.html' %} {% load humanize %}
 
 {% block content %}
+<div class="product-masthead" style="background-image: url('{{ MEDIA_URL }}{{product.main_image }}');">
+    <div class="container">
+    </div>
+</div>
 <div class="limiter">
     <div class="container-login100">
-        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55 product-details-wrap">
+        <div class="wrap-product p-l-85 p-r-85 p-t-55 p-b-55 product-details-wrap">
             <h1 class="text-center login100-form-title product-title">
                 {{product.name}}
             </h1>
+            
             <hr>
             <!-- Page Content -->
+            <h3 class="text-center product-headders"><i class="fa fa-picture-o" aria-hidden="true"></i>Images</h3>
             <div class="container page-top">
                 <div class="row">
-                    {% for item in product_pictures %}
+                    {% for item in product.images.all %}
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                        <a href="{{ MEDIA_URL }}{{product.image }}" class="fancybox" rel="ligthbox">
-                            <img  src="{{ MEDIA_URL }}{{product.image }}" class="zoom img-fluid "  alt="Product Images">
+                        <a href="{{ MEDIA_URL }}{{item.image}}" class="fancybox" rel="ligthbox">
+                            <img  src="{{ MEDIA_URL }}{{item.image}}" class="zoom img-fluid "  alt="Product Images">
                         </a>
                     </div>
                     {% endfor %}
                 </div>
             </div>
             <hr>
+            <h3 class="text-center product-headders"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</h3>
             <div class="product-details-description">
                 <div>
                     {{product.description}}
                 </div>
                 <hr>
-                <p>Author: {{product.author}}</p>
-                <p>Date: {{product.date_made}}</p>
-                <p>Made in: {{product.country_made_in}}</p>
-                <p>Height: {{product.height}} cm</p>
-                <p>Width: {{product.width}} cm</p>
-                <p>Previosly owned by: {{product.past_owners}}</p>
+                <h3 class="text-center product-headders"><i class="fa fa-info" aria-hidden="true"></i>Details</h3>
+                <p>Author: <span class="details">{{product.author}}</span></p>
+                <p>Date: <span class="details">{{product.date_made}}</span></p>
+                <p>Made in: <span class="details">{{product.country_made_in}}</span></p>
+                <p>Height: <span class="details">{{product.height}} cm </span></p>
+                <p>Width: <span class="details">{{product.width}} cm</span></p>
+                <p>Previosly owned by: <span class="details">{{product.past_owners}}</span></p>
             </div>
             <hr>
             <div class="product-links product-details-links">

@@ -242,6 +242,13 @@ iframe {
 }
 
 .wrap-login100 {
+    width: 573px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+}
+
+.wrap-product {
     width: 100%;
     background: #fff;
     border-radius: 10px;
@@ -539,6 +546,13 @@ iframe {
 
 @media (max-width: 576px) {
     .wrap-login100 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .wrap-product {
         padding-left: 15px;
         padding-right: 15px;
     }

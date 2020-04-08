@@ -1,9 +1,16 @@
 from django.db import models
-from datetime import datetime    
+from datetime import datetime
+
+class ProductsPictures(models.Model):
+    image = models.ImageField(upload_to='images/%Y/%m/%d')
+    product_id = models.ForeignKey('Product', related_name='images')
+
+    def __str__(self):
+        return self.product_id.name  
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=254, default="")
+    name = models.CharField(max_length=254, default="" , unique=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=3)
     bid_price = models.DecimalField(max_digits=10, decimal_places=3)
@@ -16,16 +23,10 @@ class Product(models.Model):
     date_created = models.DateTimeField(default=None)
     main_image = models.ImageField(upload_to='images/%Y/%m/%d')
     
-
     def __str__(self):
         return self.name
 
-class ProductsPictures(models.Model):
-    image = models.ImageField(upload_to='images/%Y/%m/%d')
-    product_id = models.ForeignKey('Product')
 
-    def __str__(self):
-        return self.product_id.name
 
 
 
