@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load humanize %} {% block content %}
+{% extends 'base.html' %} {% load humanize %}{% block page_title %}Products{% endblock %} {% block content %}
 <!-- Header -->
 <div class="masthead">
     <div class="container">
@@ -18,7 +18,10 @@
         </div>
         <div class="product-links">
             <a href="{% url 'product_details' product.id %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-info-circle" aria-hidden="true"></i>See Product Details</a>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</a>
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                <button type="submit" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
+                <input name='quantity' type="hidden" value="1">
+            </form>
             <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark" data-toggle="modal" data-target="#exampleModalCenter" id = "bid-button{{product.id}}"><i class="fa fa-handshake-o" aria-hidden="true"></i>Bid {{product.bid_price|intcomma }}£ </a>
             <div class="expiry-date " id="expiry-date{{product.id}}"></div>
         </div>

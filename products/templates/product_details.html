@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load humanize %}
+{% extends 'base.html' %} {% load humanize %}{% block page_title %}{{product.name}}{% endblock %}
 
 {% block content %}
 <div class="product-masthead" style="background-image: url('{{ MEDIA_URL }}{{product.main_image }}');">
@@ -8,18 +8,18 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-product p-l-85 p-r-85 p-t-55 p-b-55 product-details-wrap">
-            <h1 class="text-center login100-form-title product-title">
+            <h1 class="text-center login100-form-title product-title link-1">
                 {{product.name}}
             </h1>
             
             <hr>
             <!-- Page Content -->
-            <h3 class="text-center product-headders"><i class="fa fa-picture-o" aria-hidden="true"></i>Images</h3>
+            <h3 class="text-center product-headders link-1"><i class="fa fa-picture-o" aria-hidden="true"></i>Images</h3>
             <div class="container page-top">
                 <div class="row">
                     {% for item in product.images.all %}
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                        <a href="{{ MEDIA_URL }}{{item.image}}" class="fancybox" rel="ligthbox">
+                        <a href="{{ MEDIA_URL }}{{item.main_image}}" class="fancybox" rel="ligthbox">
                             <img  src="{{ MEDIA_URL }}{{item.image}}" class="zoom img-fluid "  alt="Product Images">
                         </a>
                     </div>
@@ -27,13 +27,13 @@
                 </div>
             </div>
             <hr>
-            <h3 class="text-center product-headders"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</h3>
+            <h3 class="text-center product-headders link-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</h3>
             <div class="product-details-description">
                 <div>
                     {{product.description}}
                 </div>
                 <hr>
-                <h3 class="text-center product-headders"><i class="fa fa-info" aria-hidden="true"></i>Details</h3>
+                <h3 class="text-center product-headders link-1"><i class="fa fa-info" aria-hidden="true"></i>Details</h3>
                 <p>Author: <span class="details">{{product.author}}</span></p>
                 <p>Date: <span class="details">{{product.date_made}}</span></p>
                 <p>Made in: <span class="details">{{product.country_made_in}}</span></p>

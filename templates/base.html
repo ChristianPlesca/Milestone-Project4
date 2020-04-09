@@ -20,52 +20,56 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="{% static 'js/main.js' %} "></script>
 
-    <title>Treasure Hunt</title>
+    <title>{% block page_title %}{% endblock %}</title>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <a class="navbar-brand" href="{% url 'index' %}"><img class="logo" src="/static/images/logo2.png" alt="Logo"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}"><img class="logo" src="/static/images/logo2.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto ">
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'index' %}"><i class="fa fa-home"></i>Products</a>
-            </li>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto link-1">
+                    <a class="nav-link" href="{% url 'index' %}"><i class="fa fa-home"></i>Products</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item link-1">
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</a>
+                </li>
+                <li class="nav-item link-1">
+                    <a class="nav-link" href="{% url 'profile' %}"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
+                </li>
+                {% else %}
+                <li class="nav-item link-1">
+                    <a class="nav-link " href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>Log In</a>
+                </li>
+                <li class="nav-item link-1">
+                    <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}#product-cards" method="GET">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search..." name="q" value="{{request.GET.q}}">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link " href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{% url 'profile' %}"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>Log In</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>Sign Up</a>
-            </li>
+            <a class="btn btn-success btn-sm ml-3" href="{% url 'cart' %}">
+                <i class="fa fa-shopping-cart"></i> Cart
+                {% if product_count > 0 %}
+                <span class="badge badge-light">{{ product_count }}</span>
+                {% endif %}
+            </a>
             {% endif %}
-
-        </ul>
-        <!--Sort Dropdown Button-->
-        <div class="btn-group sort-by">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Sort By 
-    </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Max Price</a>
-                <a class="dropdown-item " href="#">Min Price</a>
-            </div>
         </div>
-        <!--Search Input-->
-        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}#product-cards" method="get">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="{{request.GET.q}}">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
     </div>
 </nav>
 {% if messages %}

@@ -23,6 +23,35 @@ nav li a i {
     margin-right: 10px;
 }
 
+.link-1{
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: 0.75;
+    color: #b2b0a9;
+    letter-spacing: 1px;
+}
+
+
+.link-1 a:before, .link-1 a:after {
+    content: '';
+    border-bottom: solid 1px white;
+    position: absolute;
+    bottom: 0;
+    width: 0;
+  }
+  
+  .link-1 a:before { left: 0; }
+  .link-1 a:after { right: 0; }
+  
+  .link-1 a:hover:before, .link-1 a:hover:after {
+    width: 50%;
+  }
+  
+  .link-1 a:before, .link-1 a:after {
+    -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+  }
+
 
 /*==================Login Form=========*/
 
@@ -415,4 +444,55 @@ img.zoom {
     text-transform: uppercase;
     width: 100%;
     display: block;
+}
+
+/*==================Cart=========*/
+.bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+.category_block li:hover {
+    background-color: #007bff;
+}
+.category_block li:hover a {
+    color: #ffffff;
+}
+.category_block li a {
+    color: #343a40;
+}
+.add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+}
+.add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
+}
+.product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+.product_rassurance .list-inline {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+.product_rassurance .list-inline li:hover {
+    color: #343a40;
+}
+.reviews_product .fa-star {
+    color: gold;
+}
+.pagination {
+    margin-top: 20px;
 }

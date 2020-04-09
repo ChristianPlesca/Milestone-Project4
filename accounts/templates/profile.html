@@ -4,7 +4,7 @@
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
             <form action="{% url 'profile' %}" method="POST">
                 {% csrf_token %}
-                <h2 class="text-center login100-form-title">Profile</h2>
+                <h2 class="text-center login100-form-title link-1">Profile</h2>
                 <br>
                 <p class="txt3 text-center">You are logged in as {{ user.email }} </p>
                 <br>

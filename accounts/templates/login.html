@@ -5,7 +5,7 @@
             <form method="POST" action="{% url 'login' %}?next={{ next }}" class="accountform">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="login100-form-title p-b-32">Login</legend>
+                    <legend class="login100-form-title p-b-32 link-1">Login</legend>
                     {{ user_form | as_bootstrap }}
                     <div class="flex-sb-m w-full p-b-48">
                         <a class="txt3" href="{% url 'password_reset' %}">Forgot password ?</a>

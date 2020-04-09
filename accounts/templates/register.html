@@ -5,7 +5,7 @@
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
             <form method="post" action="{% url 'register' %}" class="accountform">
                 <fieldset class="form-group">
-                    <legend class="login100-form-title p-b-32">Create a new account</legend>
+                    <legend class="login100-form-title p-b-32 link-1">Create a new account</legend>
                     {% csrf_token %} {{ user_form | as_bootstrap }}
                     <div class="flex-sb-m w-full p-b-48">
                         <p>Already got an account? <a class="txt3" href="{% url 'login' %}">Sign In</a></p>
