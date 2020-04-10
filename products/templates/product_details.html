@@ -19,7 +19,7 @@
                 <div class="row">
                     {% for item in product.images.all %}
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                        <a href="{{ MEDIA_URL }}{{item.main_image}}" class="fancybox" rel="ligthbox">
+                        <a href="{{ MEDIA_URL }}{{item.image}}" class="fancybox" rel="ligthbox">
                             <img  src="{{ MEDIA_URL }}{{item.image}}" class="zoom img-fluid "  alt="Product Images">
                         </a>
                     </div>
@@ -44,7 +44,6 @@
             <hr>
             <div class="product-links product-details-links">
                 <a href="{% url 'index' %}#product-cards" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i>Products</a>
-                <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</a>
             </div>
         </div>
     </div>

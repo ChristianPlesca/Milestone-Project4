@@ -1,3 +1,8 @@
 from django.test import TestCase
 
-# Create your tests here.
+
+def test_view_cart_template(self):
+        url = self.client.get('/cart/')
+
+        self.assertEqual(url.status_code, 200)
+        self.assertTemplateUsed(url, 'cart.html')

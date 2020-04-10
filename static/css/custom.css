@@ -293,10 +293,14 @@ a.bttn-dark {
     transition: 0.3s ease all;
 }
 a.bttn-dark:hover {
-    color: #fff;
+    color: #28a745;
 }
 a.bttn-dark:focus {
     color: #fff;
+}
+
+button.bttn-dark:hover {
+    color: #28a745;
 }
 
 .bttn-dark {
@@ -348,10 +352,15 @@ a.bttn-dark:focus {
     margin: 5px;
 }
 
-.fa-info , .fa-pencil-square-o, .fa-picture-o{
+.fa-info , .fa-pencil-square-o, .fa-picture-o {
     margin: 5px;
     font-size: 20px !important;
     color: #28a745;
+}
+
+.fa-long-arrow-left {
+    margin: 5px;
+    font-size: 21px;
 }
 /*==================Products View Headder=========*/
 
@@ -495,4 +504,9 @@ img.zoom {
 }
 .pagination {
     margin-top: 20px;
+}
+
+.cart-image{
+    height: 50px;
+    width: 70px;
 }

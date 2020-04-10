@@ -18,7 +18,8 @@
         </div>
         <div class="product-links">
             <a href="{% url 'product_details' product.id %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-info-circle" aria-hidden="true"></i>See Product Details</a>
-            <form method="post" action="{% url 'add_to_cart' product.id %}">
+            <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
                 <button type="submit" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
                 <input name='quantity' type="hidden" value="1">
             </form>
