@@ -6,6 +6,7 @@ from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
 
+
 def logout(request):
     """A view that logs the user out and redirects back to the index page"""
     auth.logout(request)
@@ -38,13 +39,6 @@ def login(request):
     args = {'user_form': user_form, 'next': request.GET.get('next', '')}
     return render(request, 'login.html', args)
 
-
-@login_required
-def profile(request):
-    """A view that displays the profile page of a logged in user"""
-    return render(request, 'profile.html')
-
-
 def register(request):
     """A view that manages the registration form"""
     if request.method == 'POST':
@@ -61,9 +55,11 @@ def register(request):
                 return redirect(reverse('index'))
 
             else:
-                messages.error(request, "unable to log you in at this time!")
+                messages.error(request, "Unable to create an account at this time!")
     else:
         user_form = UserRegistrationForm()
 
     args = {'user_form': user_form}
     return render(request, 'register.html', args)
+
+

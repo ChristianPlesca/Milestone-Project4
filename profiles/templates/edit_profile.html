@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% load bootstrap_tags %} {% block content %}{% block page_title %}{{user.username|capfirst}}'s Profile{% endblock %}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+
+            <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|as_bootstrap }}
+                    <button type="submit">Submit</button>
+                </form>
+</div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -34,10 +34,6 @@ class TestAccountViews(TestCase):
         self.assertEqual(url.status_code, 200)
         self.assertTemplateUsed(url, 'register.html')
     
-    def test_profile_template(self):
-        url = self.client.get('/accounts/profile/')
-
-        self.assertEqual(url.status_code, 302)
 
 class TestAccountsForms(TestCase):
     def test_valid_registration_form(self):

@@ -25,7 +25,7 @@ $(document).ready(function() {
 /*==================Products Headder=========*/
 setTimeout(function() {
     $('#alert').fadeOut('slow');
-}, 3000);
+}, 5000);
 /*==================Product Details Slider=========*/
 
 $(document).ready(function(){

@@ -78,11 +78,11 @@ nav li a i {
     cursor: pointer;
 }
 
-.avatar-wrapper:hover .profile-pic {
+.avatar-wrapper:hover .profile-pic  {
     opacity: 0.5;
 }
 
-.avatar-wrapper .profile-pic {
+.avatar-wrapper .profile-pic, .profile-image {
     height: 100%;
     width: 100%;
     transition: all 0.3s ease;

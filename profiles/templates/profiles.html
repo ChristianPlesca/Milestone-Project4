@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}{% block page_title %}{{user.username|capfirst}}'s Profile{% endblock %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+            <h2 class="text-center login100-form-title link-1">Profile</h2>
+            {% if user.userprofile.image %}
+            <div class="avatar-wrapper">
+                <img class="profile-image" src="{{ MEDIA_URL}}{{user.userprofile.image}}" />
+            </div>
+            {% else %}
+            <div class="avatar-wrapper">
+                <img class="profile-image" src="/static/images/no-user-image.png" width="200px"/>
+            </div>
+            {% endif %}
+                {% if user.userprofile.description %}
+                <p class="txt3 "><strong>Description: </strong>{{ user.userprofile.description }}</p>
+                <hr>
+                {% endif %}
+                <p class="txt3 "><strong>You are logged in as:</strong> {{ user.email }} </p>
+                <hr>
+                <p class="txt3 "><strong>Username:</strong> {{user.username|capfirst}}</p>
+                <hr>
+                <p class="txt3 "><strong>Date joined: </strong>{{ user.date_joined }}</p>
+                <hr>
+                <p class="txt3 "><strong>Last login: </strong>{{ user.last_login }}</p>
+                <hr>
+                {% if user.userprofile.website %}
+                <p class="txt3 "><strong>Website: </strong><a href="{{ user.userprofile.website }}" target="_blank">{{ user.userprofile.website }}</a></p>
+                <hr>
+                {% endif %}
+                {% if user.userprofile.city %}
+                <p class="txt3 "><strong>City: </strong>{{ user.userprofile.city }}</p>
+                <hr>
+                {% endif %}
+                {% if user.userprofile.phone %}
+                <p class="txt3 "><strong>Phone Number: </strong>{{ user.userprofile.phone }}</p>
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
