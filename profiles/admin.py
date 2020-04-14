@@ -16,3 +16,4 @@ class UserProfileAdmin(admin.ModelAdmin):
     user_info.short_description = 'Info'
 
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.site_header = 'Administration Page'

@@ -1,17 +1,16 @@
-{% extends "base.html" %} {% load bootstrap_tags %} {% block content %}{% block page_title %}{{user.username|capfirst}}'s Profile{% endblock %}
+{% extends "base.html" %} {% load bootstrap_tags %} {% block page_title %}{{user.username|capfirst}}'s Profile{% endblock %} {% block content %}
 
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-
-            <div class="container">
-                <form method="post">
+            <h2 class="text-center login100-form-title link-1 edit-profile-headder">Edit Profile</h2>
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form|as_bootstrap }}
-                    <button type="submit">Submit</button>
+                    {{ edit_profile_form|as_bootstrap }}
+                    <button type="submit" class="login100-form-btn">Submit</button>
                 </form>
-</div>
-    </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

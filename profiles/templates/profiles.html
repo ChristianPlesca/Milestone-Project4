@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}{% block page_title %}{{user.username|capfirst}}'s Profile{% endblock %}
+{% extends "base.html" %} {% block page_title %}{{user.username|capfirst}}{% endblock %} {% block content %}
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
@@ -35,8 +35,13 @@
                 {% if user.userprofile.phone %}
                 <p class="txt3 "><strong>Phone Number: </strong>{{ user.userprofile.phone }}</p>
                 {% endif %}
+                <hr>
+                <div class="container-login100-form-btn">
+                    <a href="{% url 'edit_profile' user.userprofile.id %}" type="submit"  class="login100-form-btn edit-profile-button">Edit Profile</a>
+                </div>
         </div>
     </div>
+    
 </div>
 
 {% endblock %}

@@ -62,6 +62,12 @@ nav li a i {
 
 /*==================Profile Form=========*/
 
+
+
+.edit-profile-button:hover{
+    color: white !important;
+}
+
 .avatar-wrapper {
     position: relative;
     height: 200px;
@@ -83,7 +89,6 @@ nav li a i {
 }
 
 .avatar-wrapper .profile-pic, .profile-image {
-    height: 100%;
     width: 100%;
     transition: all 0.3s ease;
 }
@@ -509,4 +514,17 @@ img.zoom {
 .cart-image{
     height: 50px;
     width: 70px;
+}
+
+/*==================Edit Profile=========*/
+.control-label{
+    margin-bottom:10px !important;
+}
+
+#id_description {
+    height: 150px;
+}
+
+.edit-profile-headder{
+    margin-bottom: 40px;
 }
