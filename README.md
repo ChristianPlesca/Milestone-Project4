@@ -1,1 +1,3 @@
 # In Progress .......
+
+[![Build Status](https://travis-ci.com/ChristianPlesca/Milestone-Project4.svg?branch=master)](https://travis-ci.com/ChristianPlesca/Milestone-Project4)
