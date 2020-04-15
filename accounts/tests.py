@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from accounts.forms import UserRegistrationForm, UserLoginForm
 
+"""Test Views"""
 class TestAccountViews(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -35,6 +36,7 @@ class TestAccountViews(TestCase):
         self.assertTemplateUsed(url, 'register.html')
     
 
+"""Test Forms"""
 class TestAccountsForms(TestCase):
     def test_valid_registration_form(self):
         form = UserRegistrationForm({
@@ -45,6 +47,15 @@ class TestAccountsForms(TestCase):
         })
 
         self.assertTrue(form.is_valid())
+    
+    def test_invalid_registration_password_dont_match(self):
+        form = UserRegistrationForm({
+            'username': 'ville',
+            'email': 'ville@gmail.com',
+            'password1': 'villevalo123',
+            'password2': 'villevalo12'
+        })
+        self.assertFalse(form.is_valid())
 
     def test_valid_login(self):
         form = UserLoginForm({
@@ -53,3 +64,28 @@ class TestAccountsForms(TestCase):
         })
 
         self.assertTrue(form.is_valid())
+
+    def test_password_required_on_login(self):
+        form = UserLoginForm({'username': 'christian'})
+        self.assertFalse(form.is_valid())
+        
+    
+    def test_username_required_on_login(self):
+        form = UserLoginForm({'password': '1234qwer'})
+        self.assertFalse(form.is_valid())
+
+    def test_registration_email_must_be_unique(self):
+        User.objects.create_user(
+            username='christian',
+            email='cristi@yahoo.com')
+
+        form = UserRegistrationForm({
+            'username': 'christian',
+            'email': 'cristi@yahoo.com',
+            'password1': '1234qwer',
+            'password2': '1234qwer'
+        })
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors['email'],
+                         ['Email address must be unique!'])
+        

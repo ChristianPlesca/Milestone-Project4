@@ -9,6 +9,7 @@ verify_ssl = true
 django = "==1.11.24"
 django-forms-bootstrap = "*"
 pillow = "*"
+stripe = "*"
 
 [requires]
 python_version = "3.6"

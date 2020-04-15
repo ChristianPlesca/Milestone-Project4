@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
-from profiles.forms import ImageProfileForm
+from profiles.models import UserProfile
 
 
 
@@ -44,17 +44,15 @@ def register(request):
     """A view that manages the registration form"""
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
-        user_profile_form = ImageProfileForm(request.POST, request.FILES)
-        if user_form.is_valid() and user_profile_form.is_valid():
-            user_forms = user_form.save()
-            user_profile = user_profile_form.save()
-            user_profile.user_form = user_forms
-            user_profile.save()
+        if user_form.is_valid() :
+            the_user = user_form.save()
+
             user = auth.authenticate(request.POST.get('email'),
                                      password=request.POST.get('password1'))
-
             if user:
                 auth.login(request, user)
+                user_profile = UserProfile(user=the_user)
+                user_profile.save()
                 messages.success(request, "You have successfully registered")
                 return redirect(reverse('index'))
 
@@ -62,7 +60,6 @@ def register(request):
                 messages.error(request, "Unable to create an account at this time!")
     else:
         user_form = UserRegistrationForm()
-        user_profile_form = ImageProfileForm()
 
-    args = {'user_form': user_form ,'user_profile_form':user_profile_form }
+    args = {'user_form': user_form}
     return render(request, 'register.html', args)

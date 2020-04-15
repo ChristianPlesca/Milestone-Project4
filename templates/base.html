@@ -6,6 +6,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/browser-icon.png" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'authform/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}" />
@@ -19,7 +20,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="{% static 'js/main.js' %} "></script>
-    <title>{% block page_title %}{% endblock %}</title>
+    {% block head_js %}
+    {% endblock %}
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
