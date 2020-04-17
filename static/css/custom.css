@@ -528,3 +528,20 @@ img.zoom {
 .edit-profile-headder{
     margin-bottom: 40px;
 }
+
+/*==================Checkout=========*/
+.bottom-buffer {
+    margin-bottom: 40px !important;
+}
+
+.checkout-details{
+    font-weight: bold;
+    color: #555555;
+    
+}
+
+.credit-card-errors{
+    display: none;
+    color: #555555;
+    padding: 10px;
+}

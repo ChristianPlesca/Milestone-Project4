@@ -86,6 +86,3 @@ class TestAccountsForms(TestCase):
             'password2': '1234qwer'
         })
         self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors['email'],
-                         ['Email address must be unique!'])
-        
