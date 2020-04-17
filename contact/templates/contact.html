@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}Contact Us{% endblock %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+  <section class="flex-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2 class="brand-text-header-white metal-bg info-page-header">Contact Us</h2>
+          <h4 class="top-buffer">Got something to say or a question to ask? Let us know!</h4>
+          <p class="bold-text top-buffer">
+            Just fill out the form below and we'll be in touch as soon as we can. All the boxes are
+            mandatory. Please make your question as detailed as possible, including your order number
+            if your question concerns a recent order.
+          </p>
+
+          <form role="form" action="" method="POST" class="top-buffer bottom-buffer">
+            {% csrf_token %}
+            {{ contact_form | as_bootstrap }}
+            <button type="submit" class="btn btn-info">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

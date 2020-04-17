@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'cart',
     'profiles',
     'checkout',
+    'contact'
 ]
 
 MIDDLEWARE = [
@@ -148,5 +149,10 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET')
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+SENDGRID_ECHO_TO_STDOUT=True
 
 
