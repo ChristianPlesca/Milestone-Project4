@@ -1,8 +1,9 @@
-from django.template.loader import get_template
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
 from .forms import ContactForm
 from django.core.mail import send_mail
+from antique_shop.settings import EMAIL_HOST_USER
+
 
 def contact(request):
     contact_class = ContactForm
@@ -11,19 +12,16 @@ def contact(request):
         contact_form = contact_class(request.POST)
 
         if contact_form.is_valid():
-            contact_name = request.POST.get('contact_name', '')
-            contact_email = request.POST.get('contact_email', '')
-            message_subject = request.POST.get('message_subject', '')
-            message_content = request.POST.get('message_content', '')
-            send_mail(
-                message_subject,
-                message_content,
-                contact_email,
-                ['cristiplesca1993@gmail.com'],
-                fail_silently=False,
-                )
+            phone_number = contact_form.cleaned_data['phone_number']
+            sender_subject = contact_form.cleaned_data['message_subject']
+            sender_name = contact_form.cleaned_data['contact_name']
+            sender_email = contact_form.cleaned_data['contact_email']
+            
 
-            messages.success(request, "Your message was successfully sent!")
+            message = "{0} has sent you a new message:\nFrom Email: {1}\nFrom Phone Number: {2}\n\n{3}".format(sender_name,sender_email,phone_number, contact_form.cleaned_data['message_content'])
+            send_mail('You have recived a New Enquiry!!!', message, sender_email, [EMAIL_HOST_USER])
+
+            messages.success(request, "Thanks for your Enquiry your message was successfully sent!")
             return redirect('contact')
         else:
             messages.error(request, "Your message was not sent. Please try again.")

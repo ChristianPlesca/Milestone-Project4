@@ -3,27 +3,25 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-
-  <section class="flex-background">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8">
-          <h2 class="brand-text-header-white metal-bg info-page-header">Contact Us</h2>
-          <h4 class="top-buffer">Got something to say or a question to ask? Let us know!</h4>
-          <p class="bold-text top-buffer">
+<div class="limiter">
+  <div class="container-login100">
+      <div class="wrap-product p-l-85 p-r-85 pl-350 pr-350 p-t-120 p-b-100 product-details-wrap">
+          <h2 class="text-center login100-form-title p-b-32 link-1">Contact Us</h2>
+          <h4 class="link1 p-b-20">Got something to say or a question to ask? Please let us know!</h4>
+          <p class="p-b-20 ">
             Just fill out the form below and we'll be in touch as soon as we can. All the boxes are
             mandatory. Please make your question as detailed as possible, including your order number
             if your question concerns a recent order.
           </p>
 
-          <form role="form" action="" method="POST" class="top-buffer bottom-buffer">
+          <form role="form" action="" method="POST">
             {% csrf_token %}
             {{ contact_form | as_bootstrap }}
-            <button type="submit" class="btn btn-info">Send Message</button>
+            <button type="submit" class="login100-form-btn">Send Message</button>
           </form>
-        </div>
-      </div>
     </div>
-  </section>
+</div>
+</div>
+
 
 {% endblock %}

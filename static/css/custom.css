@@ -5,14 +5,14 @@
 }
 
 nav a {
-    font-size: 18px;
+    font-size: 15px;
     font-family: Raleway-Medium !important;
     color: #fafafa;
 }
 
 .logo {
-    width: 15rem;
-    height: 2.5rem;
+    width: 14rem;
+    height: 2.4rem;
 }
 
 nav li a i {
@@ -28,7 +28,6 @@ nav li a i {
     font-weight: 900;
     line-height: 0.75;
     color: #b2b0a9;
-    letter-spacing: 1px;
 }
 
 
@@ -544,4 +543,15 @@ img.zoom {
     display: none;
     color: #555555;
     padding: 10px;
+}
+
+/*==================Contact Us=========*/
+
+@media (min-width: 1366px){
+    .pr-350{
+        padding-right: 350px !important;
+    }
+    .pl-350{
+        padding-left: 350px !important;
+    }
 }
