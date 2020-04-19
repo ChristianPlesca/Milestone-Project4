@@ -26,7 +26,7 @@
           <hr>
     <div class="row bottom-buffer">
       <h4 class="col-md-6 checkout-details">Number of items: {{ product_count }}</h4>
-      <h4 class="col-md-6 checkout-details">Total to pay: £{{ total|intcomma }} £</h4>
+      <h4 class="col-md-6 checkout-details">Total to pay: {{ total|intcomma }} £</h4>
     </div>
     <form role="form" method="POST" action="{% url 'checkout' %}" id="payment-form">
       <div class="row">
