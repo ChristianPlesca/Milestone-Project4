@@ -10,7 +10,11 @@ django = "==1.11.24"
 django-forms-bootstrap = "*"
 pillow = "*"
 stripe = "*"
-django-sendgrid-v5 = "*"
+dj-database-url = "*"
+psycopg2 = "*"
+psycopg2-binary = "*"
+django-storages = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.6"

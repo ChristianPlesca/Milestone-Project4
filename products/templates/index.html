@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %} {% load humanize %}{% block page_title %}Products{% endblock %} {% block content %}
 <!-- Header -->
 <div class="masthead">
@@ -27,6 +28,7 @@
             <div class="expiry-date " id="expiry-date{{product.id}}"></div>
         </div>
     </div>
+    
     <script>
         $(document).ready(function() {
         var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:20}}').getTime();

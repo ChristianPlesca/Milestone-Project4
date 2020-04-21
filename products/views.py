@@ -9,5 +9,6 @@ def home_page(request):
 def product_details(request,pk):
     """Display product details page"""
     product = get_object_or_404(Product, pk=pk)
+    product.views += 1
     product.save()
     return render(request, 'product_details.html', {'product': product})

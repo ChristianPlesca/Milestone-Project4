@@ -1,5 +1,8 @@
 /*==================Navbar=========*/
-
+::-webkit-scrollbar {
+    display: none;
+}
+    
 .navbar {
     background-color: #212529 !important;
 }
@@ -11,8 +14,8 @@ nav a {
 }
 
 .logo {
-    width: 14rem;
-    height: 2.4rem;
+    width: 13rem;
+    height: 2.3rem;
 }
 
 nav li a i {
@@ -62,7 +65,7 @@ nav li a i {
 }
 
 .alert {
-    color: black !important;
+    color: whitesmoke !important;
 }
 
 /*==================Login Form=========*/
@@ -145,18 +148,7 @@ nav li a i {
 
 /*==================Shoping Cards=========*/
 
-@import url(https://fonts.googleapis.com/css?family=Lora|Roboto:400,500);
-body {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    line-height: 1.5;
-    text-rendering: optimizeLegibility;
-    font-variant-ligatures: none;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    background-color: #fafafa;
-}
+
 
 body::before,
 body::after {
@@ -246,6 +238,7 @@ body,
 @media(min-width:768px) {
     .container {
         max-width: 1800px !important;
+        
     }
     .card1 {
         width: 25rem;
@@ -379,11 +372,20 @@ button.bttn-dark:hover {
     margin: 5px;
     font-size: 21px;
 }
+
+.warning-message{
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+.warning-title {
+    background-color: #FFCC00;
+}
+
 /*==================Products View Headder=========*/
 
 .masthead {
     height: 70%;
-    background-image: url(/static/images/product_page_main_image.jpg);
+    background-image: url(/static/images/products-page-headder.png);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -472,6 +474,13 @@ img.zoom {
     display: block;
 }
 
+@media(min-width:824px){
+.views{
+    float: right;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+}
 /*==================Cart=========*/
 
 .cart-image{
@@ -551,8 +560,8 @@ img.zoom {
   }
   
   .contact-section .social {
-    margin-top: 5rem;
-    padding-bottom: 2rem;
+    margin-top: 3rem;
+    padding-bottom: 10px;
   }
   
   .contact-section .social a {
@@ -574,7 +583,7 @@ img.zoom {
   }
   
   .bg-black {
-    background-color: #161616 !important;
+    background-color: #212529 !important;
   }
   footer {
     padding: 10px 0 2rem;
@@ -589,3 +598,12 @@ img.zoom {
       color:#1db954;
       font-size: 1.5rem !important;
   }
+
+  .payment-icons{
+      margin: 20px;
+  }
+
+
+
+
+  

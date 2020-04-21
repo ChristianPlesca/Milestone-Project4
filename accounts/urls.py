@@ -1,10 +1,10 @@
 from django.conf.urls import url, include
-from . import urls_reset
-from .views import register, logout, login
+from accounts.views import logout, login, register
+from accounts import urls_reset
 
 urlpatterns = [
-    url(r'^register/$', register, name='register'),
-    url(r'^logout/$', logout, name='logout'),
-    url(r'^login/$', login, name='login'),
-    url(r'^password-reset/', include(urls_reset)),
+    url(r'^logout/', logout, name="logout"),
+    url(r'^login/', login, name="login"),
+    url(r'^register/', register, name="register"),
+    url(r'^password-reset/', include(urls_reset))
 ]

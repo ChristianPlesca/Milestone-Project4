@@ -20,9 +20,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="{% static 'js/main.js' %} "></script>
+    
     {% block head_js %}
     {% endblock %}
 </head>
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}"><img class="logo" src="/static/images/logo2.png" alt="Logo"></a>
@@ -146,8 +148,16 @@
         <div class="container">
           Copyright &copy; Christian Plesca | This website is for educational purposes only!
         </div>
+        <div class="col-xs-hidden col-sm-4 col-md-12 col-lg-12 payments ">
+          <p class='payment-icons'>
+              <i class="fa fa-cc-visa fa-2x"></i>
+              <i class="fa fa-cc-mastercard fa-2x"></i>
+              <i class="fa fa-cc-discover fa-2x"></i>
+              <i class="fa fa-cc-amex fa-2x"></i></p>
+      </div>
       </footer>
     
+
 </body>
 
 

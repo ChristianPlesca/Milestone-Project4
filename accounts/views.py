@@ -50,11 +50,10 @@ def register(request):
             user = auth.authenticate(request.POST.get('email'),
                                      password=request.POST.get('password1'))
             if user:
-                auth.login(request, user)
                 user_profile = UserProfile(user=the_user)
                 user_profile.save()
                 messages.success(request, "You have successfully registered")
-                return redirect(reverse('index'))
+                return redirect(reverse('login'))
 
             else:
                 messages.error(request, "Unable to create an account at this time!")
