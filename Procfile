@@ -1,1 +1,1 @@
-web: gunicorn antique-shop.wsgi:application
+web: gunicorn antique_shop.wsgi:application
