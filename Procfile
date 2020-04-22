@@ -1,1 +1,1 @@
-web: gunicorn milestone_project4.wsgi:application
+web: gunicorn antique-shop.wsgi:application
