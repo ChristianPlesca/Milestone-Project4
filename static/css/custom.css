@@ -385,7 +385,7 @@ button.bttn-dark:hover {
 
 .masthead {
     height: 70%;
-    background-image: url(/static/images/products-page-headder.png);
+    background-image: url(../images/products-page-headder.png);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;

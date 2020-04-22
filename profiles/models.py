@@ -7,7 +7,7 @@ class UserProfile(models.Model):
     description = models.CharField(max_length=100, default='', blank=True,null=True)
     city = models.CharField(max_length=100, default='', blank=True)
     website = models.URLField(default='', blank=True)
-    phone = models.IntegerField(default=0, blank=True,null=True)
+    phone = models.CharField(default=0, max_length=50, blank=True,null=True)
     image = models.ImageField(upload_to='avatars/%Y/%m/%d', blank=True)
 
     def __str__(self):
