@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block page_title %}{{user.username|capfirst}}{% endblock %} {% block content %}
+{% extends "base.html" %} {% load static from staticfiles %} {% block page_title %}{{user.username|capfirst}}{% endblock %} {% block content %}
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
@@ -9,9 +9,9 @@
             </div>
             {% else %}
             <div class="avatar-wrapper">
-                <img class="profile-image" src="/static/images/no-user-image.png" width="200px"/>
+                <img class="profile-image" src="{% static 'images/no-user-image.png' %}" width="200px"/>
             </div>
-            {% endif %}
+        {% endif %}
                 {% if user.userprofile.description %}
                 <p class="txt3 "><strong>Description: </strong>{{ user.userprofile.description }}</p>
                 <hr>
