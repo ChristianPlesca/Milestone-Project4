@@ -2,6 +2,10 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+.shortcut-icon{
+    background: url(../images/browser-icon.png);
+}
     
 .navbar {
     background-color: #212529 !important;
@@ -614,7 +618,7 @@ img.zoom {
   }
 
   .payment-icons{
-      margin: 20px;
+      margin: 17px;
   }
 
 
