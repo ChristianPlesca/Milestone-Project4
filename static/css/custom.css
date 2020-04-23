@@ -54,18 +54,32 @@ nav li a i {
             transition: all 0.2s ease;
   }
 
-.btn-success , .alert {
+.btn-success {
     background-color: #1db954 !important;
     border-color: #1db954 !important;
 }
 
+.alert-success {
+    background-color: #1db954 !important;
+    border-color: #1db954 !important;
+}
+
+.alert-danger, .error-msg {
+    background-color: crimson !important;
+    border-color: crimson !important;
+}
 .btn-success:hover{
     background-color: #191414 !important;
     border-color: #191414 !important;
 }
 
-.alert {
+.alert, .error-msg {
     color: whitesmoke !important;
+}
+
+.error-msg{
+    border-radius: 2px;
+    margin: 5px;
 }
 
 /*==================Login Form=========*/
