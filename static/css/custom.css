@@ -422,7 +422,8 @@ button.bttn-dark:hover {
 
 .alert {
     margin-bottom: 0rem !important;
-    margin-top: 60px;
+    margin-top: 63px;
+    border-radius: 0px !important
 }
 
 .expiry-date{
