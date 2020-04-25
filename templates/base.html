@@ -86,9 +86,15 @@
     </div>
 </div>
 {% endif %}
-
-
     {% block content %} {% endblock %}
+    <div class="loading-wrapper">
+      <div class="row">
+        <div class="text-center col-sm-12 "><p class="text-center loading-text">Loading ...</p><div class="loader3">
+      <span></span>
+      <span></span>
+      </div></div>
+      </div>
+  </div>
     <section class="contact-section bg-black">
         <div class="container">
     
@@ -142,7 +148,6 @@
     
         </div>
       </section>
-    
       <!-- Footer -->
       <footer class="bg-black small text-center text-white-50">
         <div class="container">
@@ -156,8 +161,6 @@
               <i class="fa fa-cc-amex fa-2x"></i></p>
       </div>
       </footer>
-    
-
 </body>
 
 

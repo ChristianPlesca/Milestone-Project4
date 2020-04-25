@@ -46,3 +46,7 @@ $(document).ready(function(){
 });
   
 
+/*==============Loader================*/
+$(window).on("load",function(){
+    $(".loading-wrapper").fadeOut("slow");
+});
