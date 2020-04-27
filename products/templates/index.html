@@ -1,5 +1,5 @@
 
-{% extends 'base.html' %} {% load humanize %}{% block page_title %}Products{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Products{% endblock %} {% block content %}
 <!-- Header -->
 <div class="masthead">
     <div class="container">
@@ -31,7 +31,7 @@
     
     <script>
         $(document).ready(function() {
-        var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:20}}').getTime();
+        var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:30 }}').getTime();
         var expiryDate = document.getElementById("expiry-date{{product.id}}")
         var x = setInterval(function() {
             var now = new Date().getTime();
@@ -73,10 +73,11 @@
             </div>
             <div class="modal-body">
                 <form action="" method="POST">
-                    <input required class="form-control" placeholder="Enter you max bid" type="number" step="any" min="0" max="223.9">
+                    <!--  bid_form|as_bootstrap  This is causes the error i've removed the currly brackets and comments this 
+                    out because it will push to the deployed version automaticaly   -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Submit Bid</button>
+                <button type="submit" class="btn btn-success">Submit Bid</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
             </form>
