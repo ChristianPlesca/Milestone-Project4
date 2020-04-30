@@ -22,6 +22,7 @@ from search import urls as urls_search
 from profiles import urls as urls_profiles
 from checkout import urls as urls_checkout
 from contact import urls as urls_contact
+from bid import urls as urls_bid
 from django.views import static
 from .settings import MEDIA_ROOT
 
@@ -35,5 +36,6 @@ urlpatterns = [
     url(r'^profile/', include(urls_profiles)),
     url(r'^checkout/', include(urls_checkout)),
     url(r'^contact-us/', include(urls_contact)),
+    url(r'^bid/', include(urls_bid)),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
 ]

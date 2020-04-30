@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Products{% endblock %} {% block content %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+            <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25;">
+                {{product.name}}
+            </h2>
+            <p>Youre about to submit a bid for the {{product.name}} Product</p>
+            <p>Initial bid price is {{product.bid_price}}</p>
+
+            <form action="{% url 'bid_view' product.id %}">
+                {% csrf_token %}
+                {{bid_form|as_bootstrap}}
+                <button type="submit" class="login100-form-btn">Submit Bid</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

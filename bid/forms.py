@@ -1,5 +1,7 @@
-from django import forms
+from django.forms import ModelForm
 from .models import Bid
 
-class BidForm(forms.Form):
-    bid = forms.DecimalField(max_digits=10, decimal_places=3,required=True)
+class BidForm(ModelForm):
+    class Meta:
+        model = Bid
+        fields = ['bid']

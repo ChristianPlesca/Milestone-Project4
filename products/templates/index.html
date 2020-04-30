@@ -24,7 +24,10 @@
                 <button type="submit" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
                 <input name='quantity' type="hidden" value="1">
             </form>
-            <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark" data-toggle="modal" data-target="#exampleModalCenter" id = "bid-button{{product.id}}"><i class="fa fa-handshake-o" aria-hidden="true"></i>Bid {{product.bid_price|intcomma }}£ </a>
+            <a href="{% url 'bid_view' product.id %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"  id = "bid-button{{product.id}}"><i class="fa fa-handshake-o" aria-hidden="true"></i>Bid {{product.bid_price|intcomma }}£ </a>
+            {% for bid in bids %}
+            <p>{{bid}}</p>
+            {% endfor %}
             <div class="expiry-date " id="expiry-date{{product.id}}"></div>
         </div>
     </div>
@@ -60,28 +63,5 @@
     });
     </script>
     {% endfor %}
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Bid</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="POST">
-                    <!--  bid_form|as_bootstrap  This is causes the error i've removed the currly brackets and comments this 
-                    out because it will push to the deployed version automaticaly   -->
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Submit Bid</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            </form>
-        </div>
-    </div>
 </div>
 {% endblock %}
