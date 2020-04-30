@@ -83,7 +83,11 @@ nav li a i {
 
 .error-msg{
     border-radius: 2px;
-    margin: 5px;
+    padding: 2px;
+}
+
+.error {
+    color:white;
 }
 
 /*==================Login Form=========*/

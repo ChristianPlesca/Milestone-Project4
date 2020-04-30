@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Bid,UserBid
+from .models import Bid,ProductBid
 
 
 class BidLineAdminInline(admin.TabularInline):
@@ -10,6 +10,6 @@ class BidAdmin(admin.ModelAdmin):
     inlines = (BidLineAdminInline, )
 
 
-admin.site.register(UserBid,BidAdmin)
+admin.site.register(ProductBid,BidAdmin)
 
 

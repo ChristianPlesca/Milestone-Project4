@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
+
 
 class ProductsPictures(models.Model):
     image = models.ImageField(upload_to='images/%Y/%m/%d')

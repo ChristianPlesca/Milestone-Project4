@@ -6,13 +6,16 @@
                 {{product.name}}
             </h2>
             <p>Youre about to submit a bid for the {{product.name}} Product</p>
-            <p>Initial bid price is {{product.bid_price}}</p>
-
+            <p>The Bid started at {{product.bid_price|intcomma}} £</p>
+            {% for item in bids %}
+            <p>Currently the Bid is at {{item.bid|intcomma}} placed by user {{item.user|capfirst}} for Product @ {{item.product}}</p>
+            {% endfor %}
             <form action="{% url 'bid_view' product.id %}">
                 {% csrf_token %}
                 {{bid_form|as_bootstrap}}
                 <button type="submit" class="login100-form-btn">Submit Bid</button>
             </form>
+            
         </div>
     </div>
 </div>
