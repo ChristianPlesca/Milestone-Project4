@@ -259,7 +259,7 @@ body,
 
 @media(min-width:768px) {
     .container {
-        max-width: 1800px !important;
+        max-width: 1600px !important;
         
     }
     .card1 {
@@ -307,9 +307,7 @@ body,
 
 .card1 {
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    margin: 10px;
     height: 45rem;
     overflow: hidden;
     border-radius: 7px !important;
