@@ -11,5 +11,3 @@ class BidAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProductBid,BidAdmin)
-
-

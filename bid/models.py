@@ -8,7 +8,7 @@ class ProductBid(models.Model):
         return self.product.name
 
 class Bid(models.Model):
-    product = models.ForeignKey(ProductBid,on_delete=models.CASCADE,blank=False,default="")
+    product = models.ForeignKey(ProductBid,on_delete=models.CASCADE,blank=False,default="",related_name="bids")
     bid = models.DecimalField(max_digits=10, decimal_places=3,null=True,default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,default="")
     

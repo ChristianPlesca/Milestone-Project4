@@ -36,6 +36,6 @@ urlpatterns = [
     url(r'^profile/', include(urls_profiles)),
     url(r'^checkout/', include(urls_checkout)),
     url(r'^contact-us/', include(urls_contact)),
-    url(r'^bid/', include(urls_bid)),
+    url(r'^auction/', include(urls_bid)),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
 ]

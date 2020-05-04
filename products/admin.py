@@ -9,5 +9,3 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [PostPictureInline]
 
 admin.site.register(Product, PostAdmin)
-
-

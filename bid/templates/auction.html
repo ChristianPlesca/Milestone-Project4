@@ -1,21 +1,31 @@
-{% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Products{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Auction{% endblock %} {% block content %}
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25;">
                 {{product.name}}
             </h2>
-            <p>Youre about to submit a bid for the {{product.name}} Product</p>
-            <p>The Bid started at {{product.bid_price|intcomma}} £</p>
-            {% for item in bids %}
-            <p>Currently the Bid is at {{item.bid|intcomma}} placed by user {{item.user|capfirst}} for Product @ {{item.product}}</p>
-            {% endfor %}
-            <form action="{% url 'bid_view' product.id %}">
-                {% csrf_token %}
-                {{bid_form|as_bootstrap}}
-                <button type="submit" class="login100-form-btn">Submit Bid</button>
-            </form>
-            
+            <img src="{{ MEDIA_URL }}{{product.main_image}}" alt="Auction Product Image" height = "100%" width="100%" style="border-radius: 5px;">
+            <div class="alert-bids alert-info text-center" >
+                <p class="txt3">The Bid started at {{product.bid_price|intcomma}} £</p>
+            </div>
+            {% for item in bids.bids.all %}
+                {% if forloop.last %}
+                <div class="alert-bids alert-danger text-center" role="alert" >
+                    <p class="txt3 current-bid" id = "hello">The Bid is currently at {{item.bid|intcomma}} £</p>
+                </div>
+                {% if not item.user.is_superuser %}
+                <div class="alert-bids alert-success text-center" role="alert" >
+                <p class = "txt3 current-bid">The last bid was placed by user | {{item.user}}</p>
+                </div>
+                {% endif %}
+                {% endif %}    
+                {% endfor %} 
+                <form action="{% url 'bid_view' product.id%}" method="POST" >
+                    {% csrf_token %}
+                    {{bid_form|as_bootstrap}}
+                    <button type="submit" class="login100-form-btn">Submit Bid</button>
+                </form>     
         </div>
     </div>
 </div>

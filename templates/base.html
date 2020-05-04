@@ -79,13 +79,15 @@
     </div>
 </nav>
 {% if messages %}
-<div class="alert alert-success " id="alert">
-    <div class="messages">
-        <i class="fa fa-check-circle" aria-hidden="true"></i>
-        {% for message in messages %} {{ message }} {% endfor %}
-    </div>
-</div>
-{% endif %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert" id = "alert">
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+     </button>
+     <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!
+     </strong> {{ message }}
+ </div>
+ {% endfor %}
+ {% endif %}
     {% block content %} {% endblock %}
     <div class="loading-wrapper">
       <div class="row">

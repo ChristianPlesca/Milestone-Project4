@@ -24,9 +24,7 @@
                 <button type="submit" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
                 <input name='quantity' type="hidden" value="1">
             </form>
-            
             <a href="{% url 'bid_view' product.id  %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"  id = "bid-button{{product.id}}"><i class="fa fa-handshake-o" aria-hidden="true"></i>Bid </a>
-            
             <div class="expiry-date " id="expiry-date{{product.id}}"></div>
         </div>
     </div>

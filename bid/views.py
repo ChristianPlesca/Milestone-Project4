@@ -9,19 +9,20 @@ from django.contrib.auth.decorators import login_required
 def bid_view(request,pk):
     bid_price = get_object_or_404(Product, pk=pk).bid_price
     product = get_object_or_404(Product, pk=pk)
-    bid_form = BidForm(request.POST)
+    bids = get_object_or_404(ProductBid,pk=product.id)
+    bid_form = BidForm(request.POST, instance=request.user)
     if request.method == 'POST':
         if bid_form.is_valid():
             bid_form.save()
             bid = bid_form.cleaned_data['bid']
             if bid > bid_price:
-                messages.success(request, "Your Bid was succesfully placed")
+                messages.success(request, "Your Bid was succesfully placed !")
             elif bid < bid_price:
-                messages.error(request, "The bid must be greater than initial bid price")
+                messages.error(request, "The bid must be greater than initial bid price !")
         else:
-            messages.error(request, "The Bid hasn't been submited please try again")
-            return redirect('auction')
-    args = {'bid_form':bid_form , 'product':product}
+            messages.error(request, "The Bid hasn't been submited please try again !")
+            return redirect('bid_view')
+    else:
+        bid_form = BidForm()
+    args = {'bid_form':bid_form , 'product':product,'bids':bids}
     return render(request, 'auction.html',args)
-    
-

@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Product, ProductsPictures
 
+
 def home_page(request):
     """Display index page"""
     products = Product.objects.all().order_by('name')
@@ -13,3 +14,4 @@ def product_details(request,pk):
     product.save()
     args = {'product':product}
     return render(request, 'product_details.html', args)
+

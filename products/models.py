@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 
+
 class ProductsPictures(models.Model):
     image = models.ImageField(upload_to='images/%Y/%m/%d')
     product_id = models.ForeignKey('Product', related_name='images')
@@ -28,10 +29,3 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
-
-
-
-
-
-
-
