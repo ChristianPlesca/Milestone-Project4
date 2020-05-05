@@ -7,21 +7,24 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def bid_view(request,pk):
-    bid_price = get_object_or_404(Product, pk=pk).bid_price
     product = get_object_or_404(Product, pk=pk)
-    bids = get_object_or_404(ProductBid,pk=product.id)
+    bids = get_object_or_404(ProductBid, pk=pk)
     bid_form = BidForm(request.POST, instance=request.user)
+    current_bid = request.POST.get("current_bid")
     if request.method == 'POST':
         if bid_form.is_valid():
-            bid_form.save()
-            bid = bid_form.cleaned_data['bid']
-            if bid > bid_price:
-                messages.success(request, "Your Bid was succesfully placed !")
-            elif bid < bid_price:
-                messages.error(request, "The bid must be greater than initial bid price !")
+            submit_bid = bid_form.cleaned_data['bid']
+            current_bid = float(current_bid)
+            if current_bid >= submit_bid:
+                messages.error(request, "The Bid must be higher that the current bid price !")
+                bid_form = BidForm()
+            elif current_bid <= submit_bid:
+                messages.success(request, "The bid has been succesfully submited !!!")
+                new_bid = Bid(product=bids, bid=submit_bid, user=request.user)
+                new_bid.save()
+                bid_form = BidForm()
         else:
-            messages.error(request, "The Bid hasn't been submited please try again !")
-            return redirect('bid_view')
+            messages.error(request,"There has been a problem submiting you bid please try again!")
     else:
         bid_form = BidForm()
     args = {'bid_form':bid_form , 'product':product,'bids':bids}

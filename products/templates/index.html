@@ -1,11 +1,10 @@
 
-{% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Products{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Products{% endblock %} {% block content %}
 <!-- Header -->
 <div class="masthead">
-    <div class="container">
-    </div>
+    
 </div>
-<div class="container " id="product-cards">
+<div class="container" id="product-cards">
     {% for product in products %}
     <div class="card1 bg-white shadow-1 green-hover ">
         <img src="{{ MEDIA_URL }}{{ product.main_image }}" alt="Product Image" class="d-block w-full product-image">
@@ -61,4 +60,5 @@
     </script>
     {% endfor %}
 </div>
+
 {% endblock %}

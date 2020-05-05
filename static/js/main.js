@@ -50,3 +50,7 @@ $(document).ready(function(){
 $(window).on("load",function(){
     $(".loading-wrapper").fadeOut("slow");
 });
+
+/*================Bid================*/
+
+setInterval(function(){ $("current-bid") }, 3000);

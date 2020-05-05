@@ -11,21 +11,45 @@
             </div>
             {% for item in bids.bids.all %}
                 {% if forloop.last %}
-                <div class="alert-bids alert-danger text-center" role="alert" >
-                    <p class="txt3 current-bid" id = "hello">The Bid is currently at {{item.bid|intcomma}} £</p>
+                <div class="alert-bids alert-danger text-center" role="alert" id = "current-bid" >
+                    <p class="txt3 current-bid">The Bid is currently at {{item.bid|intcomma}} £</p>
                 </div>
                 {% if not item.user.is_superuser %}
                 <div class="alert-bids alert-success text-center" role="alert" >
                 <p class = "txt3 current-bid">The last bid was placed by user | {{item.user}}</p>
                 </div>
                 {% endif %}
-                {% endif %}    
-                {% endfor %} 
                 <form action="{% url 'bid_view' product.id%}" method="POST" >
+                    <input type="number" name = "current_bid" value="{{item.bid}}" style="display: none;" >
                     {% csrf_token %}
                     {{bid_form|as_bootstrap}}
                     <button type="submit" class="login100-form-btn">Submit Bid</button>
-                </form>     
+                </form> 
+                {% endif %}      
+                {% endfor %}
+                
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter" style="float: right;">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">How to place a bid</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
