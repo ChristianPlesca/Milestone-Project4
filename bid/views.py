@@ -4,6 +4,8 @@ from .forms import BidForm
 from django.contrib import messages
 from .models import ProductBid, Bid
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from antique_shop.settings import EMAIL_HOST_USER
 
 @login_required
 def bid_view(request,pk):
@@ -12,9 +14,9 @@ def bid_view(request,pk):
     bid_form = BidForm(request.POST, instance=request.user)
     current_bid = request.POST.get("current_bid")
     if request.method == 'POST':
+        current_bid = float(current_bid)
         if bid_form.is_valid():
             submit_bid = bid_form.cleaned_data['bid']
-            current_bid = float(current_bid)
             if current_bid >= submit_bid:
                 messages.error(request, "The Bid must be higher that the current bid price !")
                 bid_form = BidForm()
@@ -23,6 +25,9 @@ def bid_view(request,pk):
                 new_bid = Bid(product=bids, bid=submit_bid, user=request.user)
                 new_bid.save()
                 bid_form = BidForm()
+            if submit_bid > product.price:
+                product.price = submit_bid
+                product.save()
         else:
             messages.error(request,"There has been a problem submiting you bid please try again!")
     else:

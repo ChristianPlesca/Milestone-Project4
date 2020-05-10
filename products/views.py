@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Product, ProductsPictures
+from bid.models import ProductBid , Bid
 
 def home_page(request):
     """Display index page"""
@@ -13,4 +14,5 @@ def product_details(request,pk):
     product.save()
     args = {'product':product}
     return render(request, 'product_details.html', args)
+
 

@@ -2,7 +2,6 @@
 {% extends 'base.html' %} {% load static %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Products{% endblock %} {% block content %}
 <!-- Header -->
 <div class="masthead">
-    
 </div>
 <div class="container" id="product-cards">
     {% for product in products %}
@@ -11,18 +10,17 @@
         <div class="px-2 py-2">
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
                 {{product.name}}
+                {% for item in bids.bids.all %}
+                <p>{{item}}</p>
+                {% endfor %}   
                 </h1>
                 <p class="mb-1">
                     {{product.description}} &hellip;
                 </p>
         </div>
         <div class="product-links">
-            <a href="{% url 'product_details' product.id %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-info-circle" aria-hidden="true"></i>See Product Details</a>
-            <form method="POST" action="{% url 'add_to_cart' product.id %}">
-                {% csrf_token %}
-                <button type="submit" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
-                <input name='quantity' type="hidden" value="1">
-            </form>
+            <a href="{% url 'product_details' product.id %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-info-circle" aria-hidden="true"></i>See Product Details</a>    
+            <a href="{% url 'bid_view' product.id  %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark" ><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy Product</a>
             <a href="{% url 'bid_view' product.id  %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"  id = "bid-button{{product.id}}"><i class="fa fa-handshake-o" aria-hidden="true"></i>Bid </a>
             <div class="expiry-date " id="expiry-date{{product.id}}"></div>
         </div>
@@ -32,6 +30,7 @@
         $(document).ready(function() {
         var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:30 }}').getTime();
         var expiryDate = document.getElementById("expiry-date{{product.id}}")
+        var buyProduct = document.getElementById("buy-product{{product.id}}")
         var x = setInterval(function() {
             var now = new Date().getTime();
             var distance = countDownDate{{product.id}} - now;
@@ -44,7 +43,6 @@
             if (distance < 0) {
                 clearInterval(x);
                 expiryDate.innerHTML = "BID EXPIRED !!!";
-                document.getElementById("bid-button{{product.id}}").disabled = true;
                 expiryDate.style.color = "crimson";
             }
             else if (!days){
@@ -57,6 +55,9 @@
             }
         }, 1000);
     });
+    </script>
+    <script>
+
     </script>
     {% endfor %}
 </div>

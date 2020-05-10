@@ -10,7 +10,8 @@ class ProductBid(models.Model):
 class Bid(models.Model):
     product = models.ForeignKey(ProductBid,on_delete=models.CASCADE,blank=False,default="",related_name="bids")
     bid = models.DecimalField(max_digits=10, decimal_places=3,null=True,default="")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,default="")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default="")
+
     
     def __str__(self):
         return "{0} | {1} | {2}".format(
