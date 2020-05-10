@@ -25,9 +25,9 @@ def bid_view(request,pk):
                 new_bid = Bid(product=bids, bid=submit_bid, user=request.user)
                 new_bid.save()
                 bid_form = BidForm()
-            if submit_bid > product.price:
-                product.price = submit_bid
-                product.save()
+                if submit_bid > product.price:
+                    product.price = submit_bid
+                    product.save()
         else:
             messages.error(request,"There has been a problem submiting you bid please try again!")
     else:
