@@ -56,7 +56,6 @@ $(window).on("load",function(){
 /*==============AUCTION================*/
 $(document).ready(function () {
     var dateCreated = document.getElementById("date_created").textContent
-    console.log(dateCreated)
         var countDownDate = new Date(dateCreated).getTime();
         var expiryDate = document.getElementById("expiry-date")
         var productPrice = $("#product-price").text()

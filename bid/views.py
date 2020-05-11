@@ -12,8 +12,8 @@ def bid_view(request,pk):
     product = get_object_or_404(Product, pk=pk)
     bids = get_object_or_404(ProductBid, pk=pk)
     bid_form = BidForm(request.POST, instance=request.user)
-    current_bid = request.POST.get("current_bid")
     if request.method == 'POST':
+        current_bid = request.POST.get("current_bid")
         current_bid = float(current_bid)
         if bid_form.is_valid():
             submit_bid = bid_form.cleaned_data['bid']
