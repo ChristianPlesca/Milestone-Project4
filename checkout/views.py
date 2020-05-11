@@ -8,6 +8,7 @@ from django.utils import timezone
 from products.models import Product
 import stripe
 from django.core.mail import send_mail
+import time 
 
 stripe.api_key = settings.STRIPE_SECRET
 
@@ -51,9 +52,11 @@ def checkout(request):
                 messages.error(request, "Your card was declined!")
             
             if customer.paid:
-                messages.error(request, "You have successfully paid")
+                messages.success(request, "You have successfully paid")
                 request.session['cart'] = {}
-
+                product.sold = True
+                product.date_created = timezone.now()
+                product.save()
                 return redirect(reverse('index'))
             else:
                 messages.error(request, "Unable to take payment")

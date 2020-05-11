@@ -9,26 +9,28 @@
         <img src="{{ MEDIA_URL }}{{ product.main_image }}" alt="Product Image" class="d-block w-full product-image">
         <div class="px-2 py-2">
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
-                {{product.name}}
-                {% for item in bids.bids.all %}
-                <p>{{item}}</p>
-                {% endfor %}   
+                {{product.name}}  
                 </h1>
                 <p class="mb-1">
                     {{product.description}} &hellip;
                 </p>
         </div>
         <div class="product-links">
-            <a href="{% url 'product_details' product.id %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-info-circle" aria-hidden="true"></i>See Product Details</a>    
+            <a href="{% url 'product_details' product.id %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-info-circle" aria-hidden="true"></i>See Product Details</a>
+            {% if product.sold == False %}    
             <a href="{% url 'bid_view' product.id  %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark" ><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy Product</a>
             <a href="{% url 'bid_view' product.id  %}" class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"  id = "bid-button{{product.id}}"><i class="fa fa-handshake-o" aria-hidden="true"></i>Bid </a>
             <div class="expiry-date " id="expiry-date{{product.id}}"></div>
+            {% else %}
+            <img src="{% static 'images/sold.png' %}"  alt="Sold" style="margin-left: 60px;">
+            <div class="expiry-date " id="expiry-date{{product.id}}" style="display: none;"></div>
+            {% endif %}
         </div>
     </div>
     
     <script>
         $(document).ready(function() {
-        var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:30 }}').getTime();
+        var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:100 }}').getTime();
         var expiryDate = document.getElementById("expiry-date{{product.id}}")
         var buyProduct = document.getElementById("buy-product{{product.id}}")
         var x = setInterval(function() {
@@ -55,9 +57,6 @@
             }
         }, 1000);
     });
-    </script>
-    <script>
-
     </script>
     {% endfor %}
 </div>

@@ -404,6 +404,7 @@ button.bttn-dark:hover {
 
 /*==================Products View Headder=========*/
 
+
 .masthead {
     height: 70%;
     background-image: url(../images/products-page-headder.png);
@@ -444,6 +445,17 @@ button.bttn-dark:hover {
     margin-top: 5px;
 }
 
+.wrap-login200{
+    width: 1000px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 100px;
+}
+
+#buy-button-wrapper , #bid-winning-purchase {
+    text-align: center !important;
+}
 /*==================Product Details=========*/
 @media(min-width:1400px){
 .product-details-wrap{
@@ -688,12 +700,19 @@ img.zoom {
     margin-top:0.5rem;
     margin-bottom: 0.5rem;
     font-family: Raleway-Medium;
-    border-radius: 2px;
+    border-radius: 6px;
     font-weight: 600;
 }
 
 .current-bid{
     color:whitesmoke !important;
+    padding: 10px;
 }
+
+.starting-bid {
+    padding: 10px;
+}
+
+
 
   

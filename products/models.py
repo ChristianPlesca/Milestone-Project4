@@ -24,6 +24,7 @@ class Product(models.Model):
     width = models.DecimalField(max_digits=5, decimal_places=1)
     past_owners = models.TextField()
     views = models.IntegerField(default=0)
+    sold = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=None)
     main_image = models.ImageField(upload_to='images/%Y/%m/%d')
     

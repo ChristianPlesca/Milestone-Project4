@@ -17,6 +17,8 @@ def bid_view(request,pk):
         current_bid = float(current_bid)
         if bid_form.is_valid():
             submit_bid = bid_form.cleaned_data['bid']
+            product.bid_price = submit_bid
+            product.save()
             if current_bid >= submit_bid:
                 messages.error(request, "The Bid must be higher that the current bid price !")
                 bid_form = BidForm()
@@ -25,9 +27,6 @@ def bid_view(request,pk):
                 new_bid = Bid(product=bids, bid=submit_bid, user=request.user)
                 new_bid.save()
                 bid_form = BidForm()
-                if submit_bid > product.price:
-                    product.price = submit_bid
-                    product.save()
         else:
             messages.error(request,"There has been a problem submiting you bid please try again!")
     else:
