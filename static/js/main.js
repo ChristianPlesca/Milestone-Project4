@@ -97,7 +97,7 @@ $(document).ready(function () {
             }
         var last_user = $("#last-user").text();
         var expiry_date = $("#expiry-date").text();
-        var currentUser = "{{user.username}}";
+        var currentUser = $("#current-user").text()
         if(expiry_date == "BID EXPIRED !!!"){
             priceExpired.style.display = "none"
             submitBid.parentNode.removeChild(submitBid);

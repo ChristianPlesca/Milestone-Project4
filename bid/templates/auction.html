@@ -3,6 +3,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login200 p-l-25 p-r-25 p-t-55 p-b-55">
+            <div id = "current-user" style="display: none;">{{user.username}}</div>
             <div class="expiry-date text-center" id="expiry-date"></div>
             <div id = "date_created" style="display: none;">{{product.date_created|truncatechars:30 }}</div>
             <div id = "price-expired" class="alert alert-danger alert-dismissible" role="alert" style="display: none;">
@@ -35,8 +36,8 @@
                     {% csrf_token %}
                     {{bid_form|as_bootstrap}}
                     <button type="submit" class="login100-form-btn">Submit Bid</button>
-                <div id = "product-price" style="display: none;">{{product.price}}</div>
-                <div id = "current-price" style="display: none;">{{item.bid}}</div>
+                    <div id = "product-price" style="display: none;">{{product.price}}</div>
+                    <div id = "current-price" style="display: none;">{{item.bid}}</div>
             </form>
         {% endif %} 
         {% endfor %}
@@ -71,7 +72,17 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            To place a bid see down below the input box,<span class="note">Note!</span> The bid must be greater than the current one.
+                            You can see the current Bid price in the Red box, in the Green box you can see who placed the last bid.
+                            <hr>
+                            <span class="note">Note!</span> You can purchase the product for the asking price although if the bid price
+                            is higher than the asking price you won't be able to purchase the product for the asking price anymore but you can still bid a higher price.
+                            <hr>
+                            <span class="note">Note!</span> The auction has a countdown timer, if you are the winner of the product visit the products page then You
+                            going to be prompted with a green box message saying you WON the bid if that's the case, next up all you have to do
+                            is click on the ADD TO CART button and you can happily claim your product.
+                            <hr>
+                            Thanks for using Treasure Hunt !!!
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -712,7 +712,11 @@ img.zoom {
 .starting-bid {
     padding: 10px;
 }
-
-
+.note {
+    background-color: crimson;
+    padding: 3px;
+    color: whitesmoke;
+    border-radius: 4px;
+}
 
   
