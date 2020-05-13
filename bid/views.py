@@ -14,15 +14,12 @@ def bid_view(request,pk):
     bid_form = BidForm(request.POST, instance=request.user)
     if request.method == 'POST':
         if bid_form.is_valid():
-            bids.refresh_from_db()
-            product.refresh_from_db()
-            current_bid = request.POST.get("current_bid")
-            current_bid = float(current_bid)
+            current_bid = Bid.objects.filter(product=bids).order_by('-bid').first()
             submit_bid = bid_form.cleaned_data['bid']
-            if current_bid >= submit_bid:
+            if current_bid.bid >= submit_bid:
                 messages.error(request, "The Bid must be higher that the current bid price !")
                 bid_form = BidForm()
-            elif current_bid < submit_bid:
+            elif current_bid.bid < submit_bid:
                 messages.success(request, "The bid has been succesfully submited !!!")
                 new_bid = Bid(product=bids, bid=submit_bid, user=request.user)
                 new_bid.save()

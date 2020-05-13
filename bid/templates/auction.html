@@ -32,7 +32,6 @@
                 {% endif %}
                 <div id = "last-user" style="display: none;">{{item.user}}</div>
                 <form id = "place-bid" action="{% url 'bid_view' product.id%}" method="POST" >
-                    <input type="hidden" name = "current_bid" value="{{item.bid}}">
                     {% csrf_token %}
                     {{bid_form|as_bootstrap}}
                     <button type="submit" class="login100-form-btn">Submit Bid</button>

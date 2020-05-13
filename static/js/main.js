@@ -103,7 +103,7 @@ $(document).ready(function () {
             submitBid.parentNode.removeChild(submitBid);
             buyButtonWrapper.style.display = "none"
             winningUser.innerHTML = "The Auction was Won by | " + last_user
-            winningPrice.innerHTML = "The Auction was Won at " + currentBid + "£"
+                winningPrice.innerHTML = "The Auction was Won at " + currentBid + "£"
 
             if(currentUser == last_user){
                 winningBidAlert.style.display = "block"
