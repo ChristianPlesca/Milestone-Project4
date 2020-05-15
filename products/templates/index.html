@@ -23,7 +23,7 @@
             <div class="expiry-date " id="expiry-date{{product.id}}"></div>
             {% else %}
             <img src="{% static 'images/sold.png' %}"  alt="Sold" style="margin-left: 60px;">
-            <div class="expiry-date " id="expiry-date{{product.id}}" style="display: none;"></div>
+            <div class="expiry-date " id="expiry-date{{product.id}}" ></div>
             {% endif %}
         </div>
     </div>
@@ -32,7 +32,6 @@
         $(document).ready(function() {
         var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:100 }}').getTime();
         var expiryDate = document.getElementById("expiry-date{{product.id}}")
-        var buyProduct = document.getElementById("buy-product{{product.id}}")
         var x = setInterval(function() {
             var now = new Date().getTime();
             var distance = countDownDate{{product.id}} - now;

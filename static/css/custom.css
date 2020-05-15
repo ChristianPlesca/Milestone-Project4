@@ -402,6 +402,22 @@ button.bttn-dark:hover {
     background-color: #FFCC00;
 }
 
+@media(max-width:320px){
+    .card1{
+        width: 17rem !important;
+    }
+    .bttn-dark{
+        width: 15rem !important;
+    }
+}
+@media(max-width:360px){
+    .card1{
+        width: 19rem;
+    }
+    .bttn-dark{
+        width: 16rem;
+    }
+}
 /*==================Products View Headder=========*/
 
 

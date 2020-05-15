@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% load humanize %}{% block page_title %}Cart{% endblock %} {% load staticfiles %}
+
+{% block content %}
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading login100-form-title text-center link-1" style="margin-top: 50px;">CART</h1>
+     </div>
+</section>
+
+<div class="container mb-4" style="height: 100%;">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    
+                    <thead>
+                        <tr>
+                            <th scope="col" class="border-0 bg-light"> </th>
+                            <th scope="col" class="border-0 bg-light">Product</th>
+                            <th scope="col" class="border-0 bg-light">Available</th>
+                            <th scope="col" class="text-center border-0 bg-light">Quantity</th>
+                            <th scope="col" class="text-right border-0 bg-light">Price</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in bid_cart_items %}
+                        <tr>
+                            <td class="border-0 align-middle"><img class="cart-image" src="{{ MEDIA_URL }}{{ item.product.main_image }}" /> </td>
+                            <td class="border-0 align-middle">{{item.product.name}}</td>
+                            <td class="border-0 align-middle">In stock</td>
+                            <td class="border-0 align-middle">1</td>
+                            <td class="text-right border-0 align-middle" ><strong>{{item.product.bid_price|intcomma}} £</strong></td>
+                            <td class="text-right border-0 align-middle"><a href="{% url 'delete_from_cart' item.product.id %}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </a> </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Shipping</td>
+                            <td class="text-right">0.00 £</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total</strong></td>
+                            <td class="text-right"><strong>{{bid_total|intcomma}} £</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <a href="{% url 'index' %}#product-cards" class="btn btn-lg btn-block btn-light text-uppercase"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Continue Shopping</a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <a href="{% url 'checkout' %}" class="btn btn-lg btn-block btn-success text-uppercase">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

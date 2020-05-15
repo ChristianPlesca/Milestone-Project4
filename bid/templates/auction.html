@@ -3,59 +3,109 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login200 p-l-25 p-r-25 p-t-55 p-b-55">
-            <div id = "current-user" style="display: none;">{{user.username}}</div>
             <div class="expiry-date text-center" id="expiry-date"></div>
-            <div id = "date_created" style="display: none;">{{product.date_created|truncatechars:30 }}</div>
-            <div id = "price-expired" class="alert alert-danger alert-dismissible" role="alert" style="display: none;">
+            {% if product.expired == False  and  current_bid.bid > product.price %}
+            <div id = "price-expired" class="alert alert-danger alert-dismissible" role="alert" >
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
                 The Bid Price is currently higher than the asking price if you're still interested in the product you can Bid down below !!!
             </div>
-            <div id = "winning-bid-alert" class="alert alert-success alert-dismissible" role="alert" style="display: none;">
+            {% endif %}
+            {% if product.expired == True  and  user.username|lower == current_bid.user|lower%}
+            <div id = "winning-bid-alert" class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
                 Congratulations you've WON the auction for the item {{product.name}} , proceed to checkout by clicking the Add to Card Button down below !!!
             </div>
+            {% endif %}
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25;">
                 {{product.name}}
             </h2>
             <img src="{{ MEDIA_URL }}{{product.main_image}}" alt="Auction Product Image" height = "100%" width="100%" style="border-radius: 5px;">
-            {% for item in bids.bids.all %}
-                {% if forloop.last %}
-                <div class="alert-bids alert-danger text-center" role="alert" id = "current-bid" >
-                    <p id = "inner-current-bid" class="txt3 current-bid">The Bid is currently at {{item.bid|intcomma}} £</p>
-                </div>
-                {% if not item.user.is_superuser %}
-                <div class="alert-bids alert-success text-center" role="alert" >
-                <p id = "winning-user" class = "txt3 current-bid">The last bid was placed by user | {{item.user}}</p>
-                </div>
-                {% endif %}
-                <div id = "last-user" style="display: none;">{{item.user}}</div>
+            {% if product.expired == True %}
+            <div class="alert-bids alert-danger text-center" role="alert" id = "current-bid" >
+                <p id = "inner-current-bid" class="txt3 current-bid">The Auction for the product {{product.name}} was WON by | {{current_bid.user|title}} </p>
+            </div>
+            {% else %}
+            <div class="alert-bids alert-danger text-center" role="alert" id = "current-bid" >
+                <p id = "inner-current-bid" class="txt3 current-bid">The Bid is currently at {{current_bid.bid|intcomma}} £</p>
+            </div>
+            <div class="alert-bids alert-success text-center" role="alert" id = "current-bid" >
+                <p id = "inner-current-bid" class="txt3 current-bid">The current bid was submited by |  {{current_bid.user|capfirst}} </p>
+            </div>
+            {% endif %}
+                {% if product.expired == False %}
                 <form id = "place-bid" action="{% url 'bid_view' product.id%}" method="POST" >
                     {% csrf_token %}
                     {{bid_form|as_bootstrap}}
                     <button type="submit" class="login100-form-btn">Submit Bid</button>
-                    <div id = "product-price" style="display: none;">{{product.price}}</div>
-                    <div id = "current-price" style="display: none;">{{item.bid}}</div>
-            </form>
-        {% endif %} 
-        {% endfor %}
+                </form>
+                {% endif %}
+        {% if product.expired == True  and  user.username|lower == current_bid.user|lower%}
+        <form method="POST" action="{% url 'add_to_cart_bid' product.id  %}">
+            {% csrf_token %}
+            <div id = "bid-winning-purchase">
+                <button type="submit"  class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Add To Cart</button>
+            </div>
+            <input name='quantity' type="hidden" value="1">
+        </form>
+        {% endif %}
+        {% if product.expired == False  and  current_bid.bid < product.price %}
         <form method="POST" action="{% url 'add_to_cart' product.id  %}">
             {% csrf_token %}
-            <input type="hidden" name = "winning-bid" value="{{item.bid}}">
             <div id = "buy-button-wrapper">
             <button type="submit" id = "purchase-button"  class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
             </div>
             <input name='quantity' type="hidden" value="1">
         </form>
-        <form method="POST" action="{% url 'add_to_cart_bid' product.id  %}">
-            {% csrf_token %}
-            <input type="hidden" name = "winning-bid" value="{{item.bid}}">
-            <div id = "bid-winning-purchase" style="display: none;">
-                <button type="submit"  class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Add To Cart</button>
-            </div>
-            <input name='quantity' type="hidden" value="1">
-        </form>     
+        {% endif %}
+        <script>
+            $(document).ready(function () {
+                var countDownDate = new Date("{{product.date_created|truncatechars:30 }}").getTime();
+                var expiryDate = document.getElementById("expiry-date")
+                var x = setInterval(function() {
+                    var now = new Date().getTime();
+                    var distance = countDownDate - now;
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    expiryDate.innerHTML = "Bid Expires In: " + days + "d " + hours + "h " +
+                        minutes + "m " + seconds + "s ";
+                    if (distance < 0) {
+                        clearInterval(x);
+                        expiryDate.innerHTML = "BID EXPIRED !!!";
+                        expiryDate.style.color = "crimson";
+                        expiryDateText = expiryDate.textContent
+                        $.ajax({
+                            type:"POST",
+                            url: "{% url 'bid_view' product.id %}",
+                            data:{'expiryDateText':expiryDateText,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',},
+                            success: function(result) {
+                                window.console.log('Successful');
+                            }
+                            })
+                            if(location.search.indexOf('r') < 0){
+                                var hash = window.location.hash;
+                                var loc = window.location.href.replace(hash, '');
+                                loc += (loc.indexOf('?') < 0? '?' : '&') + 'r';
+                                setTimeout(function(){window.location.href = loc + hash;}, 1000);
+                            }
+                        }
+                    else if (!days){
+                        expiryDate.innerHTML = "Bid Expires In: " + hours + "h " +
+                        minutes + "m " + seconds + "s ";
+                        if (!days && !hours){
+                            expiryDate.innerHTML = "Bid Expires In: " + minutes + "m " + seconds + "s ";
+                            expiryDate.style.color = "crimson";
+                        }
+                    }
+                });
+                
+            });
+        </script>
+             
         <button type="button" class="btn btn-info font-weight-medium lts-2px  mb-2 text-center" data-toggle="modal" data-target="#exampleModalCenter" style="float: right;">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
             Info
