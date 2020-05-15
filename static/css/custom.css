@@ -346,7 +346,7 @@ button.bttn-dark:hover {
     padding: 10px 0px;
     border-radius: 5px;
     border: 1px solid #212529;
-    border-radius: 5px;
+    border-radius: 25px;
     position: relative;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
     z-index: 2;
@@ -363,6 +363,7 @@ button.bttn-dark:hover {
     content: '';
     background-color: #212529;
     z-index: -1;
+    border-radius: 25px;
 }
 .bttn-dark:hover:before {
     -webkit-transition: 0.5s all ease;
@@ -370,6 +371,7 @@ button.bttn-dark:hover {
     left: 0;
     right: 0;
     opacity: 1;
+    border-radius: 25px;
 }
 .bttn-dark:focus:before {
     -webkit-transition: 0.5s all ease;
@@ -377,6 +379,7 @@ button.bttn-dark:hover {
     left: 0;
     right: 0;
     opacity: 1;
+    border-radius: 25px;
 }
 .fa-info-circle, .fa-credit-card-alt, .fa-handshake-o,.fa-arrow-circle-left  {
     font-size: 15px !important;
@@ -718,11 +721,19 @@ img.zoom {
     font-family: Raleway-Medium;
     border-radius: 6px;
     font-weight: 600;
+    border-radius: 30px;
+    border: 2px solid #212529;
+    background-color: white ;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.current-bid{
-    color:whitesmoke !important;
+.current-bid-green{
+    color: green !important;
     padding: 10px;
+}
+.current-bid-red{
+    color: crimson !important;
+    padding: 10px
 }
 
 .starting-bid {
@@ -735,4 +746,18 @@ img.zoom {
     border-radius: 4px;
 }
 
-  
+.info-bid{
+    float: right;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 10px;
+    margin-right: 0px;
+}
+.submit-bid{
+    display: inline-flex !important;
+    width: 18rem;
+}
+
+#div_id_bid label {
+    display: none;
+}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% load humanize %}{% load bootstrap_tags %}{% block page_title %}Checkout{% endblock %} {% load staticfiles %}
+
+{% block head_js %}
+    <script src="https://js.stripe.com/v2/"></script>
+    <script>
+        //<![CDATA[
+        Stripe.publishableKey = '{{ publishable }}';
+        //]]>
+    </script>
+    <script src="{% static 'js/stripe.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="limiter">
+  <div class="container-login100">
+      <div class="wrap-product p-l-85 p-r-85 p-t-55 p-b-55 product-details-wrap">
+        <div class="alert-danger" >
+          <div class="messages">
+            <div id="credit-card-errors" class="credit-card-errors" >
+              <div class="block-message error" id="stripe-error-message" ></div>
+            </div>
+          </div>
+        </div>
+          <h1 class="text-center login100-form-title product-title link-1" style="margin-top: 50px;">
+              Checkout
+          </h1>
+          <hr>
+    <div class="row bottom-buffer">
+      <h4 class="col-md-6 checkout-details">Number of items: {{ bid_product_count }}</h4>
+      <h4 class="col-md-6 checkout-details">Total to pay: {{ bid_total|intcomma }} £</h4>
+    </div>
+    <form role="form" method="POST" action="{% url 'checkout_bid' %}" id="payment-form">
+      <div class="row">
+        {% csrf_token %}
+        <div class="form-group col-md-offset-1 col-md-6">
+          <legend class="checkout-details">Delivery Address</legend>
+          <hr>
+          {{ order_form | as_bootstrap }}
+            <label for="order-email" class="control-label">Email</label>
+            <input name="order-email" type="email" class="form-control" id="order-email" />
+        </div>
+        <div class="form-group col-md-offset-2 col-md-6">
+          <legend class="checkout-details ">Payment Information</legend>
+          <hr>
+          {{ payment_form | as_bootstrap }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8" >
+          <input class="btn btn-block btn-lg btn-success" id="submit_payment_btn" type="submit" name="commit" value="Place Order" />
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+  
+
+{% endblock %}

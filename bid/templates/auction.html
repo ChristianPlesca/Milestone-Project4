@@ -1,8 +1,8 @@
-{% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Auction{% endblock %} {% block content %}
 
+{% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Auction{% endblock %} {% block content %}
 <div class="limiter">
     <div class="container-login100">
-        <div class="wrap-login200 p-l-25 p-r-25 p-t-55 p-b-55">
+        <div class="wrap-login200 p-l-25 p-r-25 p-t-55 p-b-10">
             <div class="expiry-date text-center" id="expiry-date"></div>
             {% if product.expired == False  and  current_bid.bid > product.price %}
             <div id = "price-expired" class="alert alert-danger alert-dismissible" role="alert" >
@@ -23,23 +23,25 @@
             </h2>
             <img src="{{ MEDIA_URL }}{{product.main_image}}" alt="Auction Product Image" height = "100%" width="100%" style="border-radius: 5px;">
             {% if product.expired == True %}
-            <div class="alert-bids alert-danger text-center" role="alert" id = "current-bid" >
-                <p id = "inner-current-bid" class="txt3 current-bid">The Auction for the product {{product.name}} was WON by | {{current_bid.user|title}} </p>
+            <div class="alert-bids  text-center" role="alert" id = "current-bid" >
+                <p id = "inner-current-bid" class="txt3 current-bid-green">The Auction for the product {{product.name}} was WON by | {{current_bid.user|title}} </p>
             </div>
             {% else %}
-            <div class="alert-bids alert-danger text-center" role="alert" id = "current-bid" >
-                <p id = "inner-current-bid" class="txt3 current-bid">The Bid is currently at {{current_bid.bid|intcomma}} £</p>
+            <div class="alert-bids text-center" role="alert" id = "current-bid" >
+                <p id = "inner-current-bid" class="txt3 current-bid-red">The Bid is currently at {{current_bid.bid|intcomma}} £</p>
             </div>
-            <div class="alert-bids alert-success text-center" role="alert" id = "current-bid" >
-                <p id = "inner-current-bid" class="txt3 current-bid">The current bid was submited by |  {{current_bid.user|capfirst}} </p>
+            <div class="alert-bids text-center" role="alert" id = "current-bid" >
+                <p id = "inner-current-bid" class="txt3 current-bid-green">The current bid was submited by |  {{current_bid.user|capfirst}} </p>
             </div>
             {% endif %}
                 {% if product.expired == False %}
-                <form id = "place-bid" action="{% url 'bid_view' product.id%}" method="POST" >
+                <div class="text-center  m-t-100 m-b-25">
+                <form id = "place-bid"  action="{% url 'bid_view' product.id%}" method="POST" >
                     {% csrf_token %}
                     {{bid_form|as_bootstrap}}
-                    <button type="submit" class="login100-form-btn">Submit Bid</button>
+                    <button type="submit" class="login100-form-btn submit-bid" >Submit Bid</button>
                 </form>
+            </div>
                 {% endif %}
         {% if product.expired == True  and  user.username|lower == current_bid.user|lower%}
         <form method="POST" action="{% url 'add_to_cart_bid' product.id  %}">
@@ -59,56 +61,8 @@
             <input name='quantity' type="hidden" value="1">
         </form>
         {% endif %}
-        <script>
-            $(document).ready(function () {
-                var countDownDate = new Date("{{product.date_created|truncatechars:30 }}").getTime();
-                var expiryDate = document.getElementById("expiry-date")
-                var x = setInterval(function() {
-                    var now = new Date().getTime();
-                    var distance = countDownDate - now;
-                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    expiryDate.innerHTML = "Bid Expires In: " + days + "d " + hours + "h " +
-                        minutes + "m " + seconds + "s ";
-                    if (distance < 0) {
-                        clearInterval(x);
-                        expiryDate.innerHTML = "BID EXPIRED !!!";
-                        expiryDate.style.color = "crimson";
-                        expiryDateText = expiryDate.textContent
-                        $.ajax({
-                            type:"POST",
-                            url: "{% url 'bid_view' product.id %}",
-                            data:{'expiryDateText':expiryDateText,
-                            'csrfmiddlewaretoken': '{{ csrf_token }}',},
-                            success: function(result) {
-                                window.console.log('Successful');
-                            }
-                            })
-                            if(location.search.indexOf('r') < 0){
-                                var hash = window.location.hash;
-                                var loc = window.location.href.replace(hash, '');
-                                loc += (loc.indexOf('?') < 0? '?' : '&') + 'r';
-                                setTimeout(function(){window.location.href = loc + hash;}, 1000);
-                            }
-                        }
-                    else if (!days){
-                        expiryDate.innerHTML = "Bid Expires In: " + hours + "h " +
-                        minutes + "m " + seconds + "s ";
-                        if (!days && !hours){
-                            expiryDate.innerHTML = "Bid Expires In: " + minutes + "m " + seconds + "s ";
-                            expiryDate.style.color = "crimson";
-                        }
-                    }
-                });
-                
-            });
-        </script>
-             
-        <button type="button" class="btn btn-info font-weight-medium lts-2px  mb-2 text-center" data-toggle="modal" data-target="#exampleModalCenter" style="float: right;">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-            Info
+        <button type="button" class="text-uppercase d-inline-block font-weight-medium lts-2px  text-center bttn-dark info-bid" data-toggle="modal" data-target="#exampleModalCenter" >
+            <i class="fa fa-info" aria-hidden="true" style="color: crimson;"></i>
         </button>
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -142,5 +96,51 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        var countDownDate = new Date("{{product.date_created|truncatechars:30 }}").getTime();
+        var expiryDate = document.getElementById("expiry-date")
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            expiryDate.innerHTML = "Bid Expires In: " + days + "d " + hours + "h " +
+                minutes + "m " + seconds + "s ";
+            if (distance < 0) {
+                clearInterval(x);
+                expiryDate.innerHTML = "BID EXPIRED !!!";
+                expiryDate.style.color = "crimson";
+                expiryDateText = expiryDate.textContent
+                $.ajax({
+                    type:"POST",
+                    url: "{% url 'bid_view' product.id %}",
+                    data:{'expiryDateText':expiryDateText,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',},
+                    success: function(result) {
+                        window.console.log('Successful');
+                    }
+                    })
+                    if(location.search.indexOf('r') < 0){
+                        var hash = window.location.hash;
+                        var loc = window.location.href.replace(hash, '');
+                        loc += (loc.indexOf('?') < 0? '?' : '&') + 'r';
+                        setTimeout(function(){window.location.href = loc + hash;}, 1000);
+                    }
+                }
+            else if (!days){
+                expiryDate.innerHTML = "Bid Expires In: " + hours + "h " +
+                minutes + "m " + seconds + "s ";
+                if (!days && !hours){
+                    expiryDate.innerHTML = "Bid Expires In: " + minutes + "m " + seconds + "s ";
+                    expiryDate.style.color = "crimson";
+                }
+            }
+        });
+        
+    });
+</script>
 
 {% endblock %}

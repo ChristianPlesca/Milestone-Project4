@@ -48,3 +48,11 @@ def delete_from_cart(request, id):
     request.session['cart'] = cart
     return redirect(reverse('cart'))
 
+
+def delete_from_cart_bid(request, id):
+    """Remove the selected item from the cart"""
+    cart_bid = request.session.get('cart_bid', {})
+    cart_bid.pop(id)
+
+    request.session['cart_bid'] = cart_bid
+    return redirect(reverse('view_cart_bid'))
