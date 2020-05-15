@@ -25,20 +25,20 @@ def add_to_cart(request, id):
     request.session['cart'] = cart
     return redirect(reverse('cart'))
 
-
+@login_required
 def add_to_cart_bid(request, id):
     """Add a quantity of the specified product to the cart"""
     quantity = 1
 
     cart_bid = request.session.get('cart_bid', {})
     if id in cart_bid:
-        request.session['bid_cart'] = cart_bid
+        request.session['cart_bid'] = cart_bid
         messages.success(request, 'You already have the product in the cart please proceed to checkout to purchase it !!!')    
     else:
         cart_bid[id] = cart_bid.get(id, quantity)
 
     request.session['cart_bid'] = cart_bid
-    return redirect(reverse('cart'))
+    return redirect(reverse('view_cart_bid'))
 
 def delete_from_cart(request, id):
     """Remove the selected item from the cart"""
