@@ -1,9 +1,12 @@
 
 {% extends 'base.html' %} {% load bootstrap_tags %} {% load humanize %} {% block page_title %}Auction{% endblock %} {% block content %}
+<!--Wrapper/Container-->
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login200 p-l-25 p-r-25 p-t-55 p-b-10">
+            <!--CountDown Timer-->
             <div class="expiry-date text-center" id="expiry-date"></div>
+            <!--Alert Box if Bid price higher that product price-->
             {% if product.expired == False  and  current_bid.bid > product.price %}
             <div id = "price-expired" class="alert alert-danger alert-dismissible" role="alert" >
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -11,6 +14,7 @@
                 The Bid Price is currently higher than the asking price if you're still interested in the product you can Bid down below !!!
             </div>
             {% endif %}
+            <!--Alert Box if the user has won the Bid -->
             {% if product.expired == True  and  user.username|lower == current_bid.user|lower%}
             <div id = "winning-bid-alert" class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -18,10 +22,21 @@
                 Congratulations you've WON the auction for the item {{product.name}} , proceed to checkout by clicking the Add to Card Button down below !!!
             </div>
             {% endif %}
+            <!--Product Content-->
             <h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25;">
                 {{product.name}}
             </h2>
             <img src="{{ MEDIA_URL }}{{product.main_image}}" alt="Auction Product Image" height = "100%" width="100%" style="border-radius: 5px;">
+            {% if product.expired == False  and  current_bid.bid < product.price %}
+        <!--Buy product for initial Price-->
+        <form method="POST" action="{% url 'add_to_cart' product.id  %}">
+            {% csrf_token %}
+            <div id = "buy-button-wrapper">
+            <button type="submit" id = "purchase-button"  class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
+            </div>
+            <input name='quantity' type="hidden" value="1">
+        </form>
+        {% endif %}
             {% if product.expired == True %}
             <div class="alert-bids  text-center" role="alert" id = "current-bid" >
                 <p id = "inner-current-bid" class="txt3 current-bid-green">The Auction for the product {{product.name}} was WON by | {{current_bid.user|title}} </p>
@@ -34,8 +49,9 @@
                 <p id = "inner-current-bid" class="txt3 current-bid-green">The current bid was submited by |  {{current_bid.user|capfirst}} </p>
             </div>
             {% endif %}
+            <!--Submit Bid Form-->
                 {% if product.expired == False %}
-                <div class="text-center  m-t-100 m-b-25">
+                <div class="text-center  m-t-50 m-b-25">
                 <form id = "place-bid"  action="{% url 'bid_view' product.id%}" method="POST" >
                     {% csrf_token %}
                     {{bid_form|as_bootstrap}}
@@ -43,6 +59,7 @@
                 </form>
             </div>
                 {% endif %}
+        <!--Add to Cart the winning bid-->
         {% if product.expired == True  and  user.username|lower == current_bid.user|lower%}
         <form method="POST" action="{% url 'add_to_cart_bid' product.id  %}">
             {% csrf_token %}
@@ -52,15 +69,7 @@
             <input name='quantity' type="hidden" value="1">
         </form>
         {% endif %}
-        {% if product.expired == False  and  current_bid.bid < product.price %}
-        <form method="POST" action="{% url 'add_to_cart' product.id  %}">
-            {% csrf_token %}
-            <div id = "buy-button-wrapper">
-            <button type="submit" id = "purchase-button"  class="text-uppercase d-inline-block font-weight-medium lts-2px  mb-2 text-center bttn-dark"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Buy for {{product.price|intcomma }} £</button>
-            </div>
-            <input name='quantity' type="hidden" value="1">
-        </form>
-        {% endif %}
+        <!--Info-->
         <button type="button" class="text-uppercase d-inline-block font-weight-medium lts-2px  text-center bttn-dark info-bid" data-toggle="modal" data-target="#exampleModalCenter" >
             <i class="fa fa-info" aria-hidden="true" style="color: crimson;"></i>
         </button>
@@ -97,6 +106,7 @@
     </div>
 </div>
 <script>
+    /* Countdown Timer */
     $(document).ready(function () {
         var countDownDate = new Date("{{product.date_created|truncatechars:30 }}").getTime();
         var expiryDate = document.getElementById("expiry-date")
@@ -114,6 +124,7 @@
                 expiryDate.innerHTML = "BID EXPIRED !!!";
                 expiryDate.style.color = "crimson";
                 expiryDateText = expiryDate.textContent
+                /* If the product is expired send it to the backend */
                 $.ajax({
                     type:"POST",
                     url: "{% url 'bid_view' product.id %}",
@@ -123,6 +134,7 @@
                         window.console.log('Successful');
                     }
                     })
+                    /* If product expired refresh the page ones */
                     if(location.search.indexOf('r') < 0){
                         var hash = window.location.hash;
                         var loc = window.location.href.replace(hash, '');

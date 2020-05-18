@@ -5,6 +5,7 @@
 </div>
 <div class="container" id="product-cards">
     {% for product in products %}
+    <!-- Shoping Cards Content -->
     <div class="card1 bg-white shadow-1 green-hover ">
         <img src="{{ MEDIA_URL }}{{ product.main_image }}" alt="Product Image" class="d-block w-full product-image">
         <div class="px-2 py-2">
@@ -28,6 +29,7 @@
     </div>
     
     <script>
+        /* CountDown timer for each product */
         $(document).ready(function() {
         var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:100 }}').getTime();
         var expiryDate = document.getElementById("expiry-date{{product.id}}")

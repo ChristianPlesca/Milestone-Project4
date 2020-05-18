@@ -2,17 +2,18 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-
+""" Render the Cart """
 def view_cart(request):
     """Render cart.html contents page"""
     return render(request, "cart.html")
 
+""" Render the Cart for Bid """
 def view_cart_bid(request):
     return render(request, 'cart_bid.html')
-    
+
+"""Add a quantity of the specified product to the cart"""
 @login_required
 def add_to_cart(request, id):
-    """Add a quantity of the specified product to the cart"""
     quantity = 1
 
     cart = request.session.get('cart', {})
@@ -25,6 +26,7 @@ def add_to_cart(request, id):
     request.session['cart'] = cart
     return redirect(reverse('cart'))
 
+"""Add a quantity of the specified product bid to the cart"""
 @login_required
 def add_to_cart_bid(request, id):
     """Add a quantity of the specified product to the cart"""

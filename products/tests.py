@@ -1,7 +1,6 @@
 from django.test import TestCase
 from products.models import Product
 from datetime import datetime
-# Create your tests here.
 
 class TestProductsViews(TestCase):
     def setUp(self):

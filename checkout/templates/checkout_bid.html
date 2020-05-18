@@ -10,9 +10,11 @@
     <script src="{% static 'js/stripe.js' %}"></script>
 {% endblock %}
 {% block content %}
+<!--Wrapper/Container-->
 <div class="limiter">
   <div class="container-login100">
       <div class="wrap-product p-l-85 p-r-85 p-t-55 p-b-55 product-details-wrap">
+        <!--Credit card Errors Alert-->
         <div class="alert-danger" >
           <div class="messages">
             <div id="credit-card-errors" class="credit-card-errors" >
@@ -20,6 +22,7 @@
             </div>
           </div>
         </div>
+        <!--Total and the quatity-->
           <h1 class="text-center login100-form-title product-title link-1" style="margin-top: 50px;">
               Checkout
           </h1>
@@ -28,6 +31,7 @@
       <h4 class="col-md-6 checkout-details">Number of items: {{ bid_product_count }}</h4>
       <h4 class="col-md-6 checkout-details">Total to pay: {{ bid_total|intcomma }} £</h4>
     </div>
+    <!--Order Form-->
     <form role="form" method="POST" action="{% url 'checkout_bid' %}" id="payment-form">
       <div class="row">
         {% csrf_token %}
@@ -38,6 +42,7 @@
             <label for="order-email" class="control-label">Email</label>
             <input name="order-email" type="email" class="form-control" id="order-email" />
         </div>
+        <!--Payment Form-->
         <div class="form-group col-md-offset-2 col-md-6">
           <legend class="checkout-details ">Payment Information</legend>
           <hr>

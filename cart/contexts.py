@@ -4,7 +4,7 @@ from products.models import Product
 
 
 def cart_contents(request):
-    """Ensure that the contents are available when rendering every page"""
+    """Ensure that the contents are available for initial price when rendering every page """
 
     cart = request.session.get('cart', {})
     cart_items = []
@@ -19,7 +19,7 @@ def cart_contents(request):
 
 
 def cart_contents_bid(request):
-    """Ensure that the contents are available when rendering every page"""
+    """Ensure that the contents are available for bid price when rendering every page"""
 
     cart_bid = request.session.get('cart_bid', {})
     bid_cart_items = []

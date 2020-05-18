@@ -2,9 +2,11 @@
 {% block page_title %}Contact Us{% endblock %}
 {% load bootstrap_tags %}
 {% block content %}
+<!--Wrapper/Container-->
 <div class="limiter">
   <div class="container-login100">
       <div class="wrap-product p-l-85 p-r-85 pl-350 pr-350 p-t-120 p-b-100 product-details-wrap">
+        <!--Headder-->
           <h2 class="text-center login100-form-title p-b-32 link-1">Contact Us</h2>
           <h4 class="link1 p-b-20">Got something to say or a question to ask? Please let us know!</h4>
           <p class="p-b-20 ">
@@ -12,7 +14,7 @@
             mandatory. Please make your question as detailed as possible, including your order number
             if your question concerns a recent order.
           </p>
-
+        <!--Contact Form-->
           <form role="form" action="" method="POST">
             {% csrf_token %}
             {{ contact_form | as_bootstrap }}

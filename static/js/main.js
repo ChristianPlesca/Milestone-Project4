@@ -55,7 +55,6 @@ $(window).on("load",function(){
 
 /*==============Reload Page================*/
 /* Reload the page after 15 seconds of inactivity */
-/*
 var time = new Date().getTime();
     $(document.body).bind("mousemove keypress", function(e) {
          time = new Date().getTime();
@@ -69,4 +68,3 @@ var time = new Date().getTime();
      }
 
 setTimeout(refresh, 15000);
-*/

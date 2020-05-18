@@ -1,7 +1,9 @@
 {% extends "base.html" %} {% load static from staticfiles %} {% block page_title %}{{user.username|capfirst}}{% endblock %} {% block content %}
+<!--Wrapper/Container-->
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+            <!--Profile Avatar / Content-->
             <h2 class="text-center login100-form-title link-1">Profile</h2>
             {% if user.userprofile.image %}
             <div class="avatar-wrapper">
@@ -36,6 +38,7 @@
                 <p class="txt3 "><strong>Phone Number: </strong>{{ user.userprofile.phone }}</p>
                 {% endif %}
                 <hr>
+                <!--Link to Edit Profile-->
                 <div class="container-login100-form-btn">
                     <a href="{% url 'edit_profile' user.userprofile.id %}" type="submit"  class="login100-form-btn edit-profile-button">Edit Profile</a>
                 </div>

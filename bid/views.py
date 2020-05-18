@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from antique_shop.settings import EMAIL_HOST_USER
 
+
+""" Allows a user to bid on a product selected renders the Auction page """
 @login_required
 def bid_view(request,pk):
     product = get_object_or_404(Product, pk=pk)

@@ -5,7 +5,7 @@ from .models import UserProfile
 from .forms import ImageProfileForm
 from django.contrib import messages
 
-
+""" Render the current user Profile page if the user is logged in """
 @login_required
 def profile(request, pk=None):
     if pk:
@@ -16,6 +16,7 @@ def profile(request, pk=None):
     return render(request, 'profiles.html', args)
 
 
+""" Allows the current User to Edit its Profile , Renders edit_profile.html """
 @login_required
 def edit_profile(request,pk):
     user_profile = get_object_or_404(UserProfile, pk=pk)

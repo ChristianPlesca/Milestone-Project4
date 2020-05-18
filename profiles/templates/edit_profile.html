@@ -1,8 +1,9 @@
 {% extends "base.html" %} {% load bootstrap_tags %} {% block page_title %}{{user.username|capfirst}}'s Profile{% endblock %} {% block content %}
-
+<!--Wrapper/Container-->
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+            <!--Edit Profile Form-->
             <h2 class="text-center login100-form-title link-1 edit-profile-headder">Edit Profile</h2>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}

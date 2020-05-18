@@ -5,6 +5,8 @@ from django.core.mail import send_mail
 from antique_shop.settings import EMAIL_HOST_USER
 
 
+""" Requests all the data that has been inputed by the user in the html form,
+    if the form is valid it will send the email to the site owner"""
 def contact(request):
     contact_class = ContactForm
 
