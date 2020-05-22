@@ -108,7 +108,7 @@
 <script>
     /* Countdown Timer */
     $(document).ready(function () {
-        var countDownDate = new Date("{{product.date_created|truncatechars:50 }}").getTime();
+        var countDownDate = new Date("{{product.date_created.isoformat}}").getTime();
         var expiryDate = document.getElementById("expiry-date")
         var x = setInterval(function() {
             var now = new Date().getTime();
