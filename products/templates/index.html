@@ -31,7 +31,7 @@
     <script>
         /* CountDown timer for each product */
         $(document).ready(function() {
-        var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:100 }}').getTime();
+        var countDownDate{{product.id}} = new Date('{{product.date_created|truncatechars:50 }}').getTime();
         var expiryDate = document.getElementById("expiry-date{{product.id}}")
         var x = setInterval(function() {
             var now = new Date().getTime();
