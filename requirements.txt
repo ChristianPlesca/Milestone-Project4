@@ -25,4 +25,4 @@ s3transfer==0.3.3
 sendgrid==6.2.2
 six==1.14.0
 stripe==2.46.0
-urllib3==1.25.9
+urllib3==1.26.5
